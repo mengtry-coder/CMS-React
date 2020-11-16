@@ -3,7 +3,7 @@ import 'antd/dist/antd.css';
 import '../../MainStyle.css';
 import ReactDOM from 'react-dom';
 import { Layout, Menu, Breadcrumb, Image, message, Popconfirm, Col, Row } from 'antd';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 // import LoginForm from './LoginLayout';
 // import NotFound from '../../../public/error';
 import {
@@ -15,10 +15,12 @@ import {
   LogoutOutlined,
 } from '@ant-design/icons';
 import Index from '../user/index';
+import TestData from '../user/test_data';
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 const confirm = () => {
   console.log("You click logout");
+  <Redirect to="/exception/403" />
 }
 export class MainLayout extends Component {
   state = {
@@ -85,6 +87,7 @@ export class MainLayout extends Component {
                     <Switch>
                         {/* <Route path="/" component={NotFound} /> */}
                         <Route path="/user/index" component={Index} />
+                        <Route path="/user/test" component={TestData} />
                     </Switch>
                     {/* End Main Content */}
                     </div>
