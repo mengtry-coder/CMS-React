@@ -1,5 +1,5 @@
 import React, { Component, useEffect, useCallback, useState } from 'react'
-import 'antd/dist/antd.css';
+import '../../pages/users/node_modules/antd/dist/antd.css';
 import '../../MainStyle.css';
 import ReactDOM from 'react-dom';
 import { useDispatch, useSelector } from "react-redux";

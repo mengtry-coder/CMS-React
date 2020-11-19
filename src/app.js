@@ -1,18 +1,20 @@
-import React, { Component } from 'react'
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import LoginForm from './login/LoginForm';
-import MainLayout from './view/layouts/MainLayout';
-import FetchData from './view/user/fetch_data';
+/** @format */
 
-
-export class app extends Component {
-    render() {
-        return (
-            <div>
-                
-            </div>
-        )
-    }
-}
-
-export default app
+import React from "react";
+import { BrowserRouter, Route } from "react-router-dom";
+import Dashboard from "./pages/Deshboard/index";
+import Page404 from "./pages/404/index";
+import Login from "./pages/users/form";
+const getBasename = () => `/${process.env.PUBLIC_URL.split("/").pop()}`;
+const App = () => {
+  return (
+    <React.Fragment>
+      <BrowserRouter basename={getBasename()}>
+        <Route path='/dashboard' exact component={Dashboard} />
+        <Route path='/login' component={Login} />
+        {/* <Route component={Page404} /> */}
+      </BrowserRouter>
+    </React.Fragment>
+  );
+};
+export default App;

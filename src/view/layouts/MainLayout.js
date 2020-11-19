@@ -1,11 +1,8 @@
 import React, { Component } from 'react'
-import 'antd/dist/antd.css';
+import '../../pages/users/node_modules/antd/dist/antd.css';
 import '../../MainStyle.css';
-import ReactDOM from 'react-dom';
 import { Layout, Menu, Breadcrumb, Image, message, Popconfirm, Col, Row } from 'antd';
 import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
-// import LoginForm from './LoginLayout';
-// import NotFound from '../../../public/error';
 import {
   DesktopOutlined,
   PieChartOutlined,
