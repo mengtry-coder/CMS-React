@@ -2,9 +2,10 @@
 
 import React, { Component } from "react";
 import "./styles.css";
-import { Button, Form, Input, Checkbox } from "antd";
+import { Image, Form, Input, Row, Col } from "antd";
+import UploadIcon from "./../../images/upload_image.svg";
 import "antd/dist/antd.css";
-import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import { InfoCircleOutlined } from "@ant-design/icons";
 
 const LoginForm = () => {
   // render() {
@@ -14,63 +15,98 @@ const LoginForm = () => {
   const onFinish = (value) => {
     console.log(value);
   };
+  const [form] = Form.useForm();
+
   return (
     <div>
-      <Form
-        name='normal_login'
-        className='login-form'
-        initialValues={{
-          remember: true,
-        }}
-        onFinish={(e) => onFinish(e)}>
-        <h1 className='title-center'>Login Form</h1>
-        <Form.Item
-          name='username'
-          rules={[
-            {
-              required: true,
-              message: "Please input your Username!",
-            },
-          ]}>
-          <Input
-            prefix={<UserOutlined className='site-form-item-icon' />}
-            placeholder='Username'
+      <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+      <Col className="gutter-row" span={12}>
+        <div>
+          Feature Image
+          <Image
+            width={200}
+            height={200}
+            src={UploadIcon}
           />
-        </Form.Item>
-        <Form.Item
-          name='password'
-          rules={[
-            {
-              required: true,
-              message: "Please input your Password!",
-            },
-          ]}>
-          <Input
-            prefix={<LockOutlined className='site-form-item-icon' />}
-            type='password'
-            placeholder='Password'
-          />
-        </Form.Item>
-        <Form.Item>
-          <Form.Item name='remember' valuePropName='checked' noStyle>
-            <Checkbox>Remember me</Checkbox>
-          </Form.Item>
-
-          <a className='login-form-forgot' href=''>
-            Forgot password
-          </a>
-        </Form.Item>
-
-        <Form.Item className='title-center'>
-          <Button
-            type='primary'
-            htmlType='submit'
-            className='login-form-button'>
-            Log in
-          </Button>
-          Or <a href=''>register now!</a>
-        </Form.Item>
-      </Form>
+        </div>
+      </Col>
+      <Col className="gutter-row" span={12}>
+        <div>
+          <Col className="gutter-row" span={24}>
+            <Form.Item label="Username" required 
+              tooltip={{
+                title: 'Username will required when login',
+                icon: <InfoCircleOutlined />,
+              }}>
+              <Input placeholder="username" />
+            </Form.Item>
+          </Col>
+          <Col className="gutter-row" span={24}>
+            <Form.Item
+              label="Email"
+              required
+              tooltip={{
+                title: 'Put your correct email for forgot password used!',
+                icon: <InfoCircleOutlined />,
+              }}
+            >
+              <Input placeholder="Email" />
+            </Form.Item>
+          </Col>
+          <Col className="gutter-row" span={24}>
+            <Form.Item
+              label="Password"
+              required
+              tooltip={{
+                title: 'Put strong password',
+                icon: <InfoCircleOutlined />,
+              }}
+            >
+              <Input placeholder="Password" />
+            </Form.Item>
+          </Col>
+          <Col className="gutter-row" span={24}>
+          <Form.Item
+              label="Confirm Password"
+              required
+              tooltip={{
+                title: 'Type the the same password from password field!',
+                icon: <InfoCircleOutlined />,
+              }}
+            >
+              <Input placeholder="Confirm Password" />
+            </Form.Item>
+          </Col>
+        </div>
+      </Col>
+    </Row>
+        <Form
+          form={form}
+          layout="vertical"
+        >
+          <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+            <Col className="gutter-row" span={12}>
+              <div>
+                
+              </div>
+            </Col>
+            <Col className="gutter-row" span={12}>
+              <div>
+                
+              </div>
+            </Col>
+            <Col className="gutter-row" span={12}>
+              <div>
+                
+              </div>
+            </Col>
+            <Col className="gutter-row" span={12}>
+              <div>
+                
+              </div>
+            </Col>
+          </Row>
+        </Form>
     </div>
   );
   // }

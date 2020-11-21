@@ -5,10 +5,14 @@ import { type } from "../../constants/index";
 /**
  * distructuring action type
  */
+
+//  test connection to firebase
 const { FETCH_USER_FAILURE, FETCH_USER_SUCCESS } = type.User;
+
 export const fetchTodSuccess = (data) => {
   return {
     type: FETCH_USER_SUCCESS,
+    //Post data
     payload: data,
   };
 };

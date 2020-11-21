@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from "react";
 import { Layout, Menu, Breadcrumb, Image, Popconfirm, Col, Row } from "antd";
-import { Switch } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   DesktopOutlined,
   PieChartOutlined,
@@ -10,12 +10,17 @@ import {
   TeamOutlined,
   UserOutlined,
   LogoutOutlined,
+  FormOutlined,
+  DiffOutlined
 } from "@ant-design/icons";
 import * as actionsAuth from "../../stores/actions/auth";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import User from "../../pages/users/index";
 import "antd/dist/antd.css";
 import "../../MainStyle.css";
-import Search from "../users/index";
+// import Login from '../../login/LoginForm'; 
+// import DashboardIndex from '../../pages/dashboard/index';
+
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 const Dashboard = () => {
@@ -34,7 +39,8 @@ const Dashboard = () => {
   useEffect(() => {
     fetchUserFromFirestore();
   }, [fetchUserFromFirestore]);
-  return (
+  const text = 'Are you sure to logout?';
+return (
     <Layout style={{ minHeight: "100vh" }}>
       <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
         <div className='logo'>
@@ -45,23 +51,19 @@ const Dashboard = () => {
         </div>
         <Menu theme='dark' defaultSelectedKeys={["1"]} mode='inline'>
           <Menu.Item key='1' icon={<PieChartOutlined />}>
-            Dashboard
+            <Link to="/dashboard">Dashboard</Link>
           </Menu.Item>
-          <Menu.Item key='2' icon={<DesktopOutlined />}>
-            Setting
-          </Menu.Item>
-          <SubMenu key='sub1' icon={<UserOutlined />} title='User'>
-            <Menu.Item key='3'>Tom</Menu.Item>
-            <Menu.Item key='4'>Bill</Menu.Item>
-            <Menu.Item key='5'>Alex</Menu.Item>
+          <SubMenu key='sub1' icon={<DesktopOutlined />} title='MISC'>
+            <Menu.Item key='3'><Link to="/user/index">User</Link></Menu.Item>
           </SubMenu>
-          <SubMenu key='sub2' icon={<TeamOutlined />} title='Team'>
-            <Menu.Item key='6'>Team 1</Menu.Item>
-            <Menu.Item key='8'>Team 2</Menu.Item>
+          <SubMenu key='sub2' icon={<DiffOutlined />} title='Setup'>
+            <Menu.Item key='6'><Link to="/country/index">Country</Link></Menu.Item>
+            <Menu.Item key='8'><Link to="/city/index">City</Link></Menu.Item>
           </SubMenu>
-          <Menu.Item key='9' icon={<FileOutlined />}>
-            Files
-          </Menu.Item>
+          <SubMenu key='sub3' icon={<FormOutlined />} title='CMS'>
+            <Menu.Item key='9'><Link to="/custom-image/index">Custom Image</Link></Menu.Item>
+            <Menu.Item key='10'><Link to="/custom-text/index">Custom Text</Link></Menu.Item>
+          </SubMenu>
         </Menu>
       </Sider>
       <Layout className='site-layout'>
@@ -72,7 +74,7 @@ const Dashboard = () => {
               <Popconfirm
                 clasasName='btn_logout'
                 placement='top'
-                // title={text}
+                title={text}
                 // onConfirm={confirm}
                 okText='Yes'
                 cancelText='No'>
@@ -83,13 +85,14 @@ const Dashboard = () => {
         </Header>
         <Content style={{ margin: "0 16px" }}>
           <Breadcrumb style={{ margin: "16px 0" }}>
-            <Breadcrumb.Item>User</Breadcrumb.Item>
-            <Breadcrumb.Item>Index</Breadcrumb.Item>
+            User / Index
           </Breadcrumb>
           <div
             className='site-layout-background'
             style={{ padding: 24, minHeight: 360 }}>
-            <Search />
+            {/* Main */}
+            <User />
+            {/* */}
           </div>
         </Content>
         <Footer style={{ textAlign: "center" }}>

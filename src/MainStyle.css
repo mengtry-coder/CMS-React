@@ -1,20 +1,20 @@
 .logo {
-    /* height: 32px; */
-    /* margin: 16px; */
-    /* background: rgba(255, 255, 255, 0.3); */
-  }
-img.ant-image-img {
-    height: 60px;
-    object-fit: cover;
-    margin: 0px 18px;
+  /* height: 32px; */
+  /* margin: 16px; */
+  /* background: rgba(255, 255, 255, 0.3); */
 }
-  
-  .site-layout .site-layout-background {
-    background: #fff;
-  }
-    [data-theme="dark"] .site-layout .site-layout-background {
-      background: #141414;
-    }
+img.ant-image-img {
+  height: 60px;
+  object-fit: cover;
+  margin: 0px 18px;
+}
+
+.site-layout .site-layout-background {
+  background: #fff;
+}
+[data-theme="dark"] .site-layout .site-layout-background {
+  background: #141414;
+}
 .AddNew {
   margin-bottom: 25px;
 }
@@ -26,4 +26,7 @@ img.ant-image-img {
 }
 .fonst {
   font-family: "Open Sans", sans-serif;
+}
+img.ant-image-img {
+  object-fit: contain;
 }
