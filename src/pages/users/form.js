@@ -25,7 +25,7 @@ const LoginForm = () => {
                   title: 'User Profile Picture',
                   icon: <InfoCircleOutlined />,
                 }}>
-                <Image
+                <Image className="user"
                   width={200}
                   height={200}
                   src={UploadIcon}

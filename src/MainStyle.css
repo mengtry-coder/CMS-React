@@ -28,6 +28,6 @@ img.ant-image-img {
 .fonst {
   font-family: "Open Sans", sans-serif;
 }
-img.ant-image-img {
+.ant-image.user img.ant-image-img {
   object-fit: contain;
 }
