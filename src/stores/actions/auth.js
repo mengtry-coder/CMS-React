@@ -10,6 +10,8 @@ const {
   FETCH_USER_SUCCESS,
   LOGIN_REQUEST_FAILURE,
   LOGIN_REQUEST_SUCCESS,
+  LOGOUT_REQUEST_FIALURE,
+  LOGOUT_REQUEST_SUCCESS,
 } = type.User;
 export const fetchTodSuccess = (data) => {
   return {
@@ -86,5 +88,24 @@ export const requestLogin = (credintials) => {
         dispatch(onUserRequestLoginSuccess());
       })
       .catch((e) => dispatch(onUserRequestLoginFailure(e.message)));
+  };
+};
+/**
+ * on user request to logout / sing out
+ */
+
+const onUserRequestLogoutSuccess = (message) => {
+  return {
+    type: LOGOUT_REQUEST_SUCCESS,
+    payload: message,
+  };
+};
+
+export const requestLogout = () => {
+  return async (dispatch) => {
+    await firebase
+      .auth()
+      .signOut()
+      .then(() => dispatch(onUserRequestLogoutSuccess("Logout Success!")));
   };
 };

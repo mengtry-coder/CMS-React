@@ -1,11 +1,11 @@
 /** @format */
 
-import React, { useCallback, useState, useEffect } from "react";
-import firebase, { auth } from "../../utils/firebase";
+import React, { useState, useEffect } from "react";
+import firebase from "../../utils/firebase";
 import Loading from "../../components/UI/spiner/index";
 export const AuthContext = React.createContext();
 
-const AuthProvider = ({ children }) => {
+export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [pending, setPending] = useState(true);
   useEffect(() => {
@@ -32,5 +32,3 @@ const AuthProvider = ({ children }) => {
     </AuthContext.Provider>
   );
 };
-
-export default AuthProvider;

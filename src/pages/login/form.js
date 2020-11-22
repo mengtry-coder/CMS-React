@@ -1,15 +1,18 @@
 /** @format */
 
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useContext } from "react";
+import { Redirect } from "react-router";
 import "./styles.css";
 import { Button, Form, Input, Checkbox } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import * as actionRequestLogin from "../../stores/actions/auth";
-const LoginForm = () => {
+import { AuthContext } from "../authProvider/index";
+const LoginForm = ({ history }) => {
   const [inputState, setInputState] = useState({ email: "", password: "" });
   const [inputEmail, setInputEmail] = useState("");
   const [inputPassword, setInputPassword] = useState("");
+  const { currentUser } = useContext(AuthContext);
   // const errMessage = useSelector(state => state.auth.errMessage)
   const dispatch = useDispatch();
   const onFinish = (values) => {
@@ -33,8 +36,16 @@ const LoginForm = () => {
       email: inputEmail,
       password: inputPassword,
     };
-    await dispatch(actionRequestLogin.requestLogin(credincails));
+    try {
+      await dispatch(actionRequestLogin.requestLogin(credincails));
+      history.push("/");
+    } catch (e) {
+      console.log(e.message);
+    }
   };
+  if (currentUser) {
+    return <Redirect to='/' />;
+  }
   return (
     <Fragment>
       <Form
