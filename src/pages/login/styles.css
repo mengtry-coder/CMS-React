@@ -1,3 +1,6 @@
+/** @format */
+
+@import "antd/dist/antd.css";
 body {
   background: gainsboro !important;
 }

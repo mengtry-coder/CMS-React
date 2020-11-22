@@ -1,18 +1,19 @@
 /** @format */
-import firebase from "../../utils/firebase";
+import firebase, { auth } from "../../utils/firebase";
 import User from "../../model/user";
 import { type } from "../../constants/index";
 /**
  * distructuring action type
  */
-
-//  test connection to firebase
-const { FETCH_USER_FAILURE, FETCH_USER_SUCCESS } = type.User;
-
+const {
+  FETCH_USER_FAILURE,
+  FETCH_USER_SUCCESS,
+  LOGIN_REQUEST_FAILURE,
+  LOGIN_REQUEST_SUCCESS,
+} = type.User;
 export const fetchTodSuccess = (data) => {
   return {
     type: FETCH_USER_SUCCESS,
-    //Post data
     payload: data,
   };
 };
@@ -49,5 +50,41 @@ export const setUser = () => {
       dispatch(fetchUserFailure(e.message));
       throw e;
     }
+  };
+};
+/**
+ * handle user login successfull
+ * return type success
+ */
+
+const onUserRequestLoginSuccess = (user) => {
+  console.log("User account created & signed in!");
+  return {
+    type: LOGIN_REQUEST_SUCCESS,
+    payload: user,
+  };
+};
+
+const onUserRequestLoginFailure = (message) => {
+  console.log(message);
+  return {
+    type: LOGIN_REQUEST_FAILURE,
+    payload: message,
+  };
+};
+/**
+ *
+ * @param {*} credintials
+ * request user log in using firebase credintials
+ */
+export const requestLogin = (credintials) => {
+  return async (dispatch) => {
+    await firebase
+      .auth()
+      .createUserWithEmailAndPassword(credintials.email, credintials.password)
+      .then(() => {
+        dispatch(onUserRequestLoginSuccess());
+      })
+      .catch((e) => dispatch(onUserRequestLoginFailure(e.message)));
   };
 };

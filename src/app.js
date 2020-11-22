@@ -4,7 +4,7 @@ import React from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import Dashboard from "./pages/dashboard/index";
 import Page404 from "./pages/404/index";
-import Login from "./login/LoginForm";
+import Login from "./pages/login/form";
 import User from "./pages/users/index";
 const getBasename = () => `/${process.env.PUBLIC_URL.split("/").pop()}`;
 const App = () => {
