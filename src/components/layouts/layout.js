@@ -60,7 +60,7 @@ function MainLayout(props) {
                 </div>
                 <Menu theme='dark' defaultSelectedKeys={["1"]} mode='inline'>
                 <Menu.Item key='1' icon={<PieChartOutlined />}>
-                    <Link to='/dashboard'>Dashboard</Link>
+                    <Link to='/'>Dashboard</Link>
                 </Menu.Item>
                 <SubMenu key='sub1' icon={<DesktopOutlined />} title='MISC'>
                     <Menu.Item key='3' icon={<UsergroupAddOutlined />}>

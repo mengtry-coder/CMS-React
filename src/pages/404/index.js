@@ -6,9 +6,9 @@ import { Empty } from 'antd';
 const Page404 = () => {
   return (
     <div>
-      <MainLayout>
-        <Empty />
-      </MainLayout>
+      {/* <MainLayout> */}
+        {/* <Empty /> */}
+      {/* </MainLayout> */}
     </div>
   );
 };
