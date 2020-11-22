@@ -68,7 +68,6 @@ const onUserRequestLoginSuccess = (user) => {
 };
 
 const onUserRequestLoginFailure = (message) => {
-  console.log(message);
   return {
     type: LOGIN_REQUEST_FAILURE,
     payload: message,

@@ -3,25 +3,27 @@
 import React, { Fragment, useState, useContext } from "react";
 import { Redirect } from "react-router";
 import "./styles.css";
-import { Button, Form, Input, Checkbox } from "antd";
-import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import { Button, Form, Input, Checkbox, Alert } from "antd";
+import {
+  UserOutlined,
+  LockOutlined,
+  PoweroffOutlined,
+} from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import * as actionRequestLogin from "../../stores/actions/auth";
 import { AuthContext } from "../authProvider/index";
 const LoginForm = ({ history }) => {
   const [inputState, setInputState] = useState({ email: "", password: "" });
+  const [success, setSuccess] = useState(false);
   const [inputEmail, setInputEmail] = useState("");
   const [inputPassword, setInputPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const { currentUser } = useContext(AuthContext);
+
   // const errMessage = useSelector(state => state.auth.errMessage)
   const dispatch = useDispatch();
   const onFinish = (values) => {
-    setInputEmail(values);
-
-    // if (values === "username") {
-    //   console.log("this is user name");
-    // }
-    // setInputState({ password: e.target.value, ...inputState });
+    console.log(values);
   };
   const textEmailChange = (e) => {
     // console.log(e.target.name);
@@ -36,11 +38,14 @@ const LoginForm = ({ history }) => {
       email: inputEmail,
       password: inputPassword,
     };
+    setLoading(true);
     try {
       await dispatch(actionRequestLogin.requestLogin(credincails));
       history.push("/");
+      setLoading(false);
     } catch (e) {
       console.log(e.message);
+      setLoading(false);
     }
   };
   if (currentUser) {
@@ -56,6 +61,7 @@ const LoginForm = ({ history }) => {
         }}
         onFinish={onFinish}>
         <h1 className='title-center'>Login Form</h1>
+
         <Form.Item
           name='username'
           rules={[
@@ -78,7 +84,7 @@ const LoginForm = ({ history }) => {
               message: "Please input your Password!",
             },
           ]}>
-          <Input
+          <Input.Password
             prefix={<LockOutlined className='site-form-item-icon' />}
             type='password'
             placeholder='Password'
@@ -89,12 +95,12 @@ const LoginForm = ({ history }) => {
           <Form.Item name='remember' valuePropName='checked' noStyle>
             <Checkbox>Remember me</Checkbox>
           </Form.Item>
-
           <a className='login-form-forgot'>Forgot password</a>
         </Form.Item>
 
         <Form.Item className='title-center'>
           <Button
+            loading={loading}
             onClick={onSubmitRequestLogin}
             type='primary'
             htmlType='submit'
