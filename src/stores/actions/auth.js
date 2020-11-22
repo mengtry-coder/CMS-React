@@ -12,6 +12,8 @@ const {
   LOGIN_REQUEST_SUCCESS,
   LOGOUT_REQUEST_FIALURE,
   LOGOUT_REQUEST_SUCCESS,
+  CREATE_USER_FIALURE,
+  CREATE_USER_SUCCESS,
 } = type.User;
 export const fetchTodSuccess = (data) => {
   return {
@@ -99,12 +101,52 @@ const onUserRequestLogoutSuccess = (message) => {
     payload: message,
   };
 };
+const onUserRequestLogoutFailure = (message) => {
+  return {
+    type: LOGOUT_REQUEST_FIALURE,
+    payload: message,
+  };
+};
 
 export const requestLogout = () => {
   return async (dispatch) => {
     await firebase
       .auth()
       .signOut()
-      .then(() => dispatch(onUserRequestLogoutSuccess("Logout Success!")));
+      .then(() => {
+        dispatch(onUserRequestLogoutSuccess("Logout Success!"));
+      })
+      .catch((e) => {
+        dispatch(onUserRequestLogoutFailure(e.message));
+      });
+  };
+};
+/**
+ * create user
+ */
+
+export const createUserSucess = () => {
+  return {
+    type: CREATE_USER_SUCCESS,
+  };
+};
+
+export const createUserFailure = () => {
+  return {
+    type: CREATE_USER_FIALURE,
+  };
+};
+
+export const requestSignUp = (credintials) => {
+  return async (dispatch) => {
+    await firebase
+      .auth()
+      .createUserWithEmailAndPassword(credintials.email, credintials.password)
+      .then(() => {
+        dispatch(createUserSucess());
+      })
+      .catch((e) => {
+        createUserFailure(e.message);
+      });
   };
 };
