@@ -45,29 +45,29 @@ const Index = ({ isLoading }) => {
     console.log(e);
   };
   return (
-    <MainLayout>
     <div>
-      <Button className='AddNew' type='primary' onClick={showModal}>
-        <PlusOutlined /> Add New
-      </Button>
-      <Modal
-        title='New User'
-        visible={visible}
-        onOk={handleOk}
-        onCancel={handleCancel}>
-        <Form />
-      </Modal>
-      <Search />
-      <br></br>
-      <Table
-        dataSource={users}
-        columns={columns}
-        loading={isLoading && <Loading />}
-        scroll={(e) => onSroll(e)}
-        pagination={{ pageSize: 50 }}
-      />
+      <MainLayout>
+        <Button className='AddNew' type='primary' onClick={showModal}>
+          <PlusOutlined /> Add New
+        </Button>
+        <Modal
+          title='New User'
+          visible={visible}
+          onOk={handleOk}
+          onCancel={handleCancel}>
+          <Form />
+        </Modal>
+        <Search />
+        <br></br>
+        <Table
+          dataSource={users}
+          columns={columns}
+          loading={isLoading && <Loading />}
+          scroll={(e) => onSroll(e)}
+          pagination={{ pageSize: 50 }}
+        />
+      </MainLayout>
     </div>
-    </MainLayout>
   );
 };
 Index.propTypes = propTypes;

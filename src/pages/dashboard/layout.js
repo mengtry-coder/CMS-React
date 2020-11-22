@@ -15,7 +15,8 @@ import * as actionsAuth from "../../stores/actions/auth";
 import { useDispatch } from "react-redux";
 import User from "../../pages/users/index";
 import "../../MainStyle.css";
-const MainLayout = (props) => {
+
+function MainLayout(props) {
     const { Header, Content, Footer, Sider } = Layout;
     const { SubMenu } = Menu;
     const [collapsed, setCallaped] = useState(false);
@@ -100,7 +101,7 @@ const MainLayout = (props) => {
                         style={{ padding: 24, minHeight: 360 }}>
                         {/* Main */}
                         {props.children}
-                        <User isLoading={isLoading}/>
+                        {/* <User isLoading={isLoading}/> */}
                         {/* */}
                     </div>
                     </Content>
