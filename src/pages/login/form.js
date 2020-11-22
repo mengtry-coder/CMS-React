@@ -9,6 +9,7 @@ import * as actionRequestLogin from "../../stores/actions/auth";
 const LoginForm = () => {
   const [inputState, setInputState] = useState({ email: "", password: "" });
   const [inputEmail, setInputEmail] = useState("");
+  const [inputPassword, setInputPassword] = useState("");
   // const errMessage = useSelector(state => state.auth.errMessage)
   const dispatch = useDispatch();
   const onFinish = (values) => {
@@ -29,8 +30,8 @@ const LoginForm = () => {
   };
   const onSubmitRequestLogin = async () => {
     const credincails = {
-      email: inputState.email,
-      password: inputState.password,
+      email: inputEmail,
+      password: inputPassword,
     };
     await dispatch(actionRequestLogin.requestLogin(credincails));
   };
@@ -42,7 +43,6 @@ const LoginForm = () => {
         initialValues={{
           remember: true,
         }}
-        onChange={(e) => textEmailChange(e)}
         onFinish={onFinish}>
         <h1 className='title-center'>Login Form</h1>
         <Form.Item
@@ -52,11 +52,11 @@ const LoginForm = () => {
               required: true,
               message: "Please input your Username!",
             },
-          ]}
-          onChange={(e) => textPasswordChange(e)}>
+          ]}>
           <Input
             prefix={<UserOutlined className='site-form-item-icon' />}
             placeholder='Username'
+            onChange={(e) => setInputEmail(e.target.value)}
           />
         </Form.Item>
         <Form.Item
@@ -71,6 +71,7 @@ const LoginForm = () => {
             prefix={<LockOutlined className='site-form-item-icon' />}
             type='password'
             placeholder='Password'
+            onChange={(e) => setInputPassword(e.target.value)}
           />
         </Form.Item>
         <Form.Item>

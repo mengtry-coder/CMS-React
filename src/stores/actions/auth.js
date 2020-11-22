@@ -81,7 +81,7 @@ export const requestLogin = (credintials) => {
   return async (dispatch) => {
     await firebase
       .auth()
-      .createUserWithEmailAndPassword(credintials.email, credintials.password)
+      .signInWithEmailAndPassword(credintials.email, credintials.password)
       .then(() => {
         dispatch(onUserRequestLoginSuccess());
       })
