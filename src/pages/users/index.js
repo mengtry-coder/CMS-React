@@ -11,7 +11,7 @@ import { DeleteOutlined, PlusOutlined } from "@ant-design/icons";
 import { columns } from "../../data/index";
 import Loading from "../../components/UI/spiner/index";
 import PropTypes from "prop-types";
-import MainLayout from "./../../pages/dashboard/layout"
+import MainLayout from "../../components/layouts/layout"
 
 const propTypes = {
   isLoading: PropTypes.bool.isRequired,

@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Layout, Menu, Breadcrumb, Image, Popconfirm, Col, Row } from "antd";
 import { Link } from "react-router-dom";
-import MainLayout from "./layout"
+import MainLayout from "./../../components/layouts/layout"
 import {
   DesktopOutlined,
   PieChartOutlined,
