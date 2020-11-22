@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Layout, Menu, Breadcrumb, Image, Popconfirm, Col, Row } from "antd";
 import { Link } from "react-router-dom";
+import MainLayout from "./layout"
 import {
   DesktopOutlined,
   PieChartOutlined,
@@ -104,7 +105,7 @@ const Dashboard = () => {
             className='site-layout-background'
             style={{ padding: 24, minHeight: 360 }}>
             {/* Main */}
-            <User isLoading={isLoading} />
+            <User isLoading={isLoading}/>
             {/* */}
           </div>
         </Content>

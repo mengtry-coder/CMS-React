@@ -11,6 +11,7 @@ import { DeleteOutlined, PlusOutlined } from "@ant-design/icons";
 import { columns } from "../../data/index";
 import Loading from "../../components/UI/spiner/index";
 import PropTypes from "prop-types";
+import MainLayout from "./../../pages/dashboard/layout"
 
 const propTypes = {
   isLoading: PropTypes.bool.isRequired,
@@ -44,6 +45,7 @@ const Index = ({ isLoading }) => {
     console.log(e);
   };
   return (
+    <MainLayout>
     <div>
       <Button className='AddNew' type='primary' onClick={showModal}>
         <PlusOutlined /> Add New
@@ -65,6 +67,7 @@ const Index = ({ isLoading }) => {
         pagination={{ pageSize: 50 }}
       />
     </div>
+    </MainLayout>
   );
 };
 Index.propTypes = propTypes;
