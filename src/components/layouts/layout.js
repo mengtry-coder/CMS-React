@@ -1,14 +1,18 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Layout, Menu, Breadcrumb, Image, Popconfirm, Col, Row } from "antd";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import {
   DesktopOutlined,
   PieChartOutlined,
   FileOutlined,
   TeamOutlined,
   UserOutlined,
+  FileImageOutlined,
   LogoutOutlined,
   FormOutlined,
+  FundViewOutlined,
+  UsergroupAddOutlined,
+  SettingOutlined,
   DiffOutlined,
 } from "@ant-design/icons";
 import * as actionsAuth from "../../stores/actions/auth";
@@ -39,6 +43,10 @@ function MainLayout(props) {
         setIsLoading(false);
         });
     }, [fetchUserFromFirestore]);
+    
+    const confirm = (props) => {
+        console.log(props);
+    }
     const text = "Are you sure to logout?";
     return (
         <div className={props.class}>
@@ -55,24 +63,27 @@ function MainLayout(props) {
                     <Link to='/dashboard'>Dashboard</Link>
                 </Menu.Item>
                 <SubMenu key='sub1' icon={<DesktopOutlined />} title='MISC'>
-                    <Menu.Item key='3'>
+                    <Menu.Item key='3' icon={<UsergroupAddOutlined />}>
                     <Link to='/user/index'>User</Link>
                     </Menu.Item>
                 </SubMenu>
                 <SubMenu key='sub2' icon={<DiffOutlined />} title='Setup'>
-                    <Menu.Item key='6'>
+                    <Menu.Item key='6' icon={<FundViewOutlined />}>
                     <Link to='/country/index'>Country</Link>
                     </Menu.Item>
-                    <Menu.Item key='8'>
+                    <Menu.Item key='8' icon={<FundViewOutlined />}>
                     <Link to='/city/index'>City</Link>
                     </Menu.Item>
                 </SubMenu>
                 <SubMenu key='sub3' icon={<FormOutlined />} title='CMS'>
-                    <Menu.Item key='9'>
-                    <Link to='/custom-image/index'>Custom Image</Link>
+                    <Menu.Item key='9' icon={<FileImageOutlined />}>
+                        <Link to='/custom-image/index'>Custom Image</Link>
                     </Menu.Item>
-                    <Menu.Item key='10'>
-                    <Link to='/custom-text/index'>Custom Text</Link>
+                    <Menu.Item key='10' icon={<FormOutlined />}>
+                        <Link to='/custom-text/index'>Custom Text</Link>
+                    </Menu.Item>
+                    <Menu.Item icon={<SettingOutlined />} key='11'>
+                        <Link to='/setting/index'>Config</Link>
                     </Menu.Item>
                 </SubMenu>
                 </Menu>
@@ -86,7 +97,7 @@ function MainLayout(props) {
                             clasasName='btn_logout'
                             placement='top'
                             title={text}
-                            // onConfirm={confirm}
+                            onConfirm={confirm}
                             okText='Yes'
                             cancelText='No'>
                             <LogoutOutlined /> Logout

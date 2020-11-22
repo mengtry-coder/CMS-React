@@ -1,10 +1,14 @@
 /** @format */
 
 import React from "react";
+import MainLayout from "../../components/layouts/layout";
+import { Empty } from 'antd';
 const Page404 = () => {
   return (
     <div>
-      <h1>Page Not Found😇😇😇</h1>
+      <MainLayout>
+        <Empty />
+      </MainLayout>
     </div>
   );
 };
