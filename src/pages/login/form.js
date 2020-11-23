@@ -10,7 +10,7 @@ import {
   PoweroffOutlined,
 } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
-import * as actionRequestLogin from "../../stores/actions/auth";
+import * as actionRequestLogin from "../../stores/actions/index";
 import { AuthContext } from "../authProvider/index";
 const LoginForm = ({ history }) => {
   const [inputState, setInputState] = useState({ email: "", password: "" });

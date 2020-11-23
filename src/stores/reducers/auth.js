@@ -20,7 +20,7 @@ const userReducer = (state = initialState, action) => {
     case FETCH_USER_SUCCESS:
       return {
         ...state,
-        todo: action.payload,
+        users: action.payload,
       };
     case FETCH_USER_FAILURE:
       const mess = action.payload;

@@ -31,21 +31,21 @@ function MainLayout(props) {
     setCallaped(value);
   };
   const dispatch = useDispatch();
-  const fetchUserFromFirestore = useCallback(async () => {
-    try {
-      await dispatch(actionsAuth.setUser());
-    } catch (e) {
-      console.log(e);
-    }
-  }, [dispatch]);
-  useEffect(() => {
-    setIsLoading(true);
-    fetchUserFromFirestore().then(() => {
-      setIsLoading(false);
-    });
-  }, [fetchUserFromFirestore]);
+  // const fetchUserFromFirestore = useCallback(async () => {
+  //   try {
+  //     await dispatch(actionsAuth.setUser());
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // }, [dispatch]);
+  // useEffect(() => {
+  //   setIsLoading(true);
+  //   fetchUserFromFirestore().then(() => {
+  //     setIsLoading(false);
+  //   });
+  // }, [fetchUserFromFirestore]);
 
-  const confirm = (props) => {
+  const confirm = () => {
     dispatch(actionsAuth.requestLogout());
   };
   const text = "Are you sure to logout?";
