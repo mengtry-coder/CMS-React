@@ -41,9 +41,12 @@ export const setUser = () => {
             new User(
               id,
               datax.name,
+              datax.age,
               datax.email,
+              datax.phone,
               datax.created_date,
               datax.avatar,
+              datax.address,
             ),
           );
         }
@@ -148,5 +151,14 @@ export const requestSignUp = (credintials) => {
       .catch((e) => {
         createUserFailure(e.message);
       });
+  };
+};
+
+export const requestCreateUser = () => {
+  return async (dipatch) => {
+    const { currentUser } = firebase.auth();
+    const ref = await firebase.firestore().collection("users");
+    const onSnapshot = ref.add.where("uid", "===", currentUser.uid);
+    if (!onSnapshot.empty) return;
   };
 };

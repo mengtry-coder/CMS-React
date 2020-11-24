@@ -1,6 +1,17 @@
 /** @format */
-
-import { DeleteOutlined } from "@ant-design/icons";
+import React from "react";
+import { DeleteOutlined, EditFilled } from "@ant-design/icons";
+import { Tag } from "antd";
+const arr = [
+  {
+    id: 1,
+    icon: <EditFilled />,
+  },
+  {
+    id: 2,
+    icon: <DeleteOutlined />,
+  },
+];
 export const users = [
   {
     key: "1",
@@ -25,6 +36,16 @@ export const columns = [
     key: "name",
   },
   {
+    title: "Email",
+    dataIndex: "email",
+    key: "email",
+  },
+  {
+    title: "Phone",
+    dataIndex: "phone",
+    key: "phone",
+  },
+  {
     title: "Age",
     dataIndex: "age",
     key: "age",
@@ -38,5 +59,6 @@ export const columns = [
     title: "Action",
     dataIndex: "action",
     key: "action",
+    render: () => <EditFilled onClick={() => alert("Clicked")} />,
   },
 ];
