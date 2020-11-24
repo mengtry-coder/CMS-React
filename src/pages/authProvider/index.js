@@ -18,7 +18,9 @@ export const AuthProvider = ({ children }) => {
   if (pending) {
     return (
       <div>
-        <Loading />
+        <div className="spin-style">
+          <Loading />
+        </div>
       </div>
     );
   }
