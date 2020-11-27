@@ -2,25 +2,15 @@
 
 import React, { Component } from "react";
 import { Row, Col, Form, Input, Select, Button } from "antd";
-// import "../../MainStyle.css";
-import "antd/dist/antd.css";
 
-const Index = () => {
+const Search = () => {
   const { Option } = Select;
   return (
     <>
       <Row gutter={16}>
         <Col span={8}>
-          <Form.Item label='Name'>
+          <Form.Item label='Image Name'>
             <Input />
-          </Form.Item>
-        </Col>
-        <Col span={4}>
-          <Form.Item label='Status'>
-            <Select defaultValue='active'>
-              <Option value='1'>Active</Option>
-              <Option value='0'>Inactive</Option>
-            </Select>
           </Form.Item>
         </Col>
         <Col gutter={2}>
@@ -44,4 +34,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default Search;

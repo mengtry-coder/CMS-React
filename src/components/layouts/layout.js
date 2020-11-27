@@ -8,6 +8,7 @@ import {
   PieChartOutlined,
   FileOutlined,
   TeamOutlined,
+  FileAddOutlined,
   UserOutlined,
   FileImageOutlined,
   LogoutOutlined,
@@ -63,8 +64,11 @@ function MainLayout(props) {
             <Menu.Item key='1' icon={<PieChartOutlined />}>
               <Link to='/'>Dashboard</Link>
             </Menu.Item>
+            <Menu.Item key='21' icon={<FileAddOutlined />}>
+              <Link to='/media/index'>Media</Link>
+            </Menu.Item>
             <SubMenu key='sub1' icon={<DesktopOutlined />} title='MISC'>
-              <Menu.Item key='3' icon={<UsergroupAddOutlined />}>
+              <Menu.Item key='2' icon={<UsergroupAddOutlined />}>
                 <Link to='/user/index'>User</Link>
               </Menu.Item>
             </SubMenu>

@@ -9,6 +9,7 @@ import PrivateRoute from "./pages/authProvider/privateRoute";
 import Login from "./pages/login/form";
 import User from "./pages/users/index";
 import NotFound from "./pages/404/index";
+import Media from "./pages/media/index";
 const getBasename = () => `/${process.env.PUBLIC_URL.split("/").pop()}`;
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
         <PrivateRoute path='/' exact component={Dashboard} />
         <Route path='/login' component={Login} />
         <PrivateRoute path='/user/index' component={User} />
+        <PrivateRoute path='/media/index' component={Media} />
         {/* <Route component={NotFound} /> */}
       </BrowserRouter>
     </AuthProvider>
