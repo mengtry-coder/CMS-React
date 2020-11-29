@@ -71,6 +71,9 @@ export const setRequesUploadMedia = (file) => {
               status: true,
               isActive: 1,
             });
+          })
+          .then(() => {
+            dispatch(setMediaRequest());
           });
       });
     } catch (e) {

@@ -123,7 +123,7 @@ const Index = (props) => {
           beforeUpload={beforeUpload}
           customRequest={handleRequestUploadImage}
           onPreview={onPreview}>
-          {medias.length < 5 && "+ Upload"}
+          {medias.length <= medias.length && "+ Upload"}
         </Upload>
       </ImgCrop>
       <Pagination
