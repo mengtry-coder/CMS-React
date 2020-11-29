@@ -120,3 +120,17 @@ export const setMediaRequest = () => {
     }
   };
 };
+
+export const requestRemoveMedia = (id) => {
+  return async (dispatch) => {
+    firestore
+      .collection("media")
+      .doc(id)
+      .update({
+        status: false,
+      })
+      .then(() => {
+        dispatch(setMediaRequest());
+      });
+  };
+};

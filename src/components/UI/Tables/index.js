@@ -11,10 +11,10 @@ const propTypes = {
   onUpdate: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   onDelete: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   dataSource: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
-  isLoading: PropTypes.bool,
+  loading: PropTypes.bool,
   id: PropTypes.string,
 };
-const CustomTables = ({ onDelete, onUpdate, isLoading, dataSource, id }) => {
+const CustomTables = ({ onDelete, onUpdate, loading, dataSource, id }) => {
   const actions_button = [
     <EditFilled onClick={onUpdate} />,
     <DeleteOutlined onClick={onDelete} />,
@@ -35,7 +35,7 @@ const CustomTables = ({ onDelete, onUpdate, isLoading, dataSource, id }) => {
       //   rowSelection={(e) => console.log(e)}
       dataSource={dataSource}
       columns={newColumns}
-      loading={isLoading && <Loading />}
+      loading={loading}
       //   //   scroll={}
       pagination={{ pageSize: 50 }}
     />

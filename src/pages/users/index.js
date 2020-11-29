@@ -61,7 +61,7 @@ const Index = () => {
         <br></br>
         <CustomTable
           dataSource={users}
-          loading={isLoading}
+          loading={isLoading && <Loading />}
           onDelete={_onDelete}
           onUpdate={_onUpdate}
           // scroll={(e) => onSroll(e)}

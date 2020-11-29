@@ -83,10 +83,30 @@ const Index = (props) => {
     try {
       await dispatch(actionMedia.setRequesUploadMedia(file));
       onSuccess(null);
+      message.success("Successfull!!");
     } catch (e) {
       onError(e);
     }
   };
+  /**
+   *
+   * @param {*} value
+   * request update media image
+   */
+  const onRemoveMediaSource = async (value) => {
+    try {
+      await dispatch(actionMedia.requestRemoveMedia(value.uid));
+      message.success("This image has been removed!!");
+    } catch (e) {
+      message.error(e.message);
+    }
+    console.log(value.uid);
+  };
+  /**
+   *
+   * @param {*} file
+   * preview image
+   */
   const onPreview = async (file) => {
     let src = file.url;
     if (!src) {
@@ -104,28 +124,30 @@ const Index = (props) => {
   const onShowSizeChange = (current, pageSize) => {
     console.log(current, pageSize);
   };
-  if (state.loading) {
-    return (
-      <MainLayout>
-        <Loading />
-      </MainLayout>
-    );
-  }
+
   return (
     <MainLayout>
       <Search />
-      <ImgCrop rotate>
-        <Upload
-          // action='https://www.mocky.io/v2/5cc8019d300000980a055e76'
-          listType='picture-card'
-          fileList={medias}
-          onChange={onChange}
-          beforeUpload={beforeUpload}
-          customRequest={handleRequestUploadImage}
-          onPreview={onPreview}>
-          {medias.length <= medias.length && "+ Upload"}
-        </Upload>
-      </ImgCrop>
+      {state.loading ? (
+        <div className='loading'>
+          <Loading />
+        </div>
+      ) : (
+        <ImgCrop rotate>
+          <Upload
+            // action='https://www.mocky.io/v2/5cc8019d300000980a055e76'
+            listType='picture-card'
+            fileList={medias}
+            onChange={onChange}
+            beforeUpload={beforeUpload}
+            customRequest={handleRequestUploadImage}
+            onRemove={(value) => onRemoveMediaSource(value)}
+            onPreview={onPreview}>
+            {medias.length <= medias.length && "+ Upload"}
+          </Upload>
+        </ImgCrop>
+      )}
+
       <Pagination
         showSizeChanger
         onShowSizeChange={onShowSizeChange}

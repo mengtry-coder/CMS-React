@@ -1,0 +1,8 @@
+/** @format */
+
+@import "antd/dist/antd.css";
+
+.loading {
+  align-items: center;
+  justify-content: center;
+}

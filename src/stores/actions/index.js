@@ -8,4 +8,9 @@ export {
   requestCreateUser,
   requestForgotPassword,
 } from "./auth";
-export { setRequesUploadMedia, setMediaRequest } from "./media";
+export {
+  setRequesUploadMedia,
+  setMediaRequest,
+  // requestRemoveMedia,
+  requestRemoveMedia,
+} from "./media";
