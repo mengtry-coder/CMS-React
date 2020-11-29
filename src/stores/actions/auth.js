@@ -1,5 +1,5 @@
 /** @format */
-import firebase, { auth } from "../../utils/firebase";
+import firebase, { auth, firestore } from "../../utils/firebase";
 import User from "../../model/user";
 import { type } from "../../constants/index";
 /**
@@ -30,7 +30,7 @@ export const fetchUserFailure = (message) => {
 export const setUser = () => {
   return async (dispatch, getState) => {
     try {
-      const ref = firebase.firestore().collection("users");
+      const ref = firestore.collection("users");
       const onSnapshot = await ref.get();
       if (!onSnapshot.empty) {
         let data = [];
@@ -50,7 +50,6 @@ export const setUser = () => {
             ),
           );
         }
-        console.log(data);
         dispatch(fetchTodSuccess(data));
       }
     } catch (e) {
@@ -142,6 +141,7 @@ export const createUserFailure = () => {
 
 export const requestSignUp = (credintials) => {
   return async (dispatch) => {
+    console.log(credintials);
     await firebase
       .auth()
       .createUserWithEmailAndPassword(credintials.email, credintials.password)
@@ -158,7 +158,22 @@ export const requestCreateUser = () => {
   return async (dipatch) => {
     const { currentUser } = firebase.auth();
     const ref = await firebase.firestore().collection("users");
-    const onSnapshot = ref.add.where("uid", "===", currentUser.uid);
+    const onSnapshot = ref.where("uid", "===", currentUser.uid);
     if (!onSnapshot.empty) return;
+  };
+};
+
+export const requestForgotPassword = (email) => {
+  return async (dispatch, getState) => {
+    await firebase
+      .auth()
+      .sendPasswordResetEmail(email)
+      .then((user) => {
+        alert("Please check your email...");
+        console.log(user);
+      })
+      .catch((e) => {
+        console.log(e.message);
+      });
   };
 };

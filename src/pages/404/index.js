@@ -7,7 +7,7 @@ const Page404 = () => {
   return (
     <div>
       <MainLayout>
-        <Empty />
+        <Empty/>
       </MainLayout>
     </div>
   );

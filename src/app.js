@@ -20,7 +20,7 @@ const App = () => {
         <Route path='/login' component={Login} />
         <PrivateRoute path='/user/index' component={User} />
         <PrivateRoute path='/media/index' component={Media} />
-        {/* <Route component={NotFound} /> */}
+        {/* <Route component={Page404} /> */}
       </BrowserRouter>
     </AuthProvider>
   );

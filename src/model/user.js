@@ -1,18 +1,18 @@
 /** @format */
 
 import PropTypes from "prop-types";
-class User {
+class Users {
   static PropTypes = {
-    key: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    age: PropTypes.string.isRequired,
+    age: PropTypes.number.isRequired,
     email: PropTypes.string.isRequired,
     phone: PropTypes.string.isRequired,
     password: PropTypes.number,
     address: PropTypes.string,
   };
-  constructor(key, name, age, email, phone, created_date, avatar, address) {
-    this.key = key;
+  constructor(id, name, age, email, phone, created_date, avatar, address) {
+    this.id = id;
     this.name = name;
     this.age = age;
     this.email = email;
@@ -22,5 +22,5 @@ class User {
     this.address = address;
   }
 }
-User.PropTypes = PropTypes;
-export default User;
+Users.PropTypes = PropTypes;
+export default Users;

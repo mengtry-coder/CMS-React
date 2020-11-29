@@ -6,4 +6,6 @@ export {
   requestLogout,
   requestSignUp,
   requestCreateUser,
+  requestForgotPassword,
 } from "./auth";
+export { setRequesUploadMedia, setMediaRequest } from "./media";

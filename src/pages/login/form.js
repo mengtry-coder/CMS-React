@@ -11,7 +11,7 @@ import {
 } from "@ant-design/icons";
 import lLogin from "../../components/layouts/loginLayout";
 import { useDispatch, useSelector } from "react-redux";
-import * as actionRequestLogin from "../../stores/actions/index";
+import * as actions from "../../stores/actions/index";
 import { AuthContext } from "../authProvider/index";
 const LoginForm = ({ history }) => {
   const [inputState, setInputState] = useState({ email: "", password: "" });
@@ -41,12 +41,20 @@ const LoginForm = ({ history }) => {
     };
     setLoading(true);
     try {
-      await dispatch(actionRequestLogin.requestLogin(credincails));
+      await dispatch(actions.requestLogin(credincails));
       history.push("/");
       setLoading(false);
     } catch (e) {
       console.log(e.message);
       setLoading(false);
+    }
+  };
+  const handleRequestForgotPassword = async (email) => {
+    console.log("this was click");
+    try {
+      await dispatch(actions.requestForgotPassword(email));
+    } catch (e) {
+      console.log(e);
     }
   };
   if (currentUser) {
@@ -97,7 +105,11 @@ const LoginForm = ({ history }) => {
             <Form.Item name='remember' valuePropName='checked' noStyle>
               <Checkbox>Remember me</Checkbox>
             </Form.Item>
-            <a className='login-form-forgot'>Forgot password</a>
+            <a
+              className='login-form-forgot'
+              onClick={handleRequestForgotPassword}>
+              Forgot password
+            </a>
           </Form.Item>
 
           <Form.Item className='title-center'>
@@ -112,8 +124,8 @@ const LoginForm = ({ history }) => {
             Or <a href='#'>register now!</a>
           </Form.Item>
         </Form>
-        </lLogin>
-        </Fragment>
+      </lLogin>
+    </Fragment>
   );
 };
 
