@@ -1,13 +1,27 @@
 @import "antd/dist/antd.css";
 .logo {
-  /* height: 32px; */
-  /* margin: 16px; */
-  /* background: rgba(255, 255, 255, 0.3); */
+  color: white;
+  display: flex;
+}
+.logo-login {
+  color: white;
+  display: flex;
+}
+.logo h1 {
+  color: white;
+  font-family: math;
+  font-size: 25px;
+  margin: 15px 40px;
+}
+.logo-login h1 {
+  font-family: math;
+  font-size: 40px;
+  margin: 41px 40px;
 }
 img.ant-image-img {
-  height: 60px;
+  height: auto;
   object-fit: cover;
-  margin: 0px 18px;
+  margin: 10px 20px;
 }
 
 .site-layout .site-layout-background {

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from "react";
 import { Layout, Menu, Breadcrumb, Image, Popconfirm, Col, Row } from "antd";
+import LogoImg from "./../../images/Cms-logo-sample-1.svg"
 import { Link, Redirect } from "react-router-dom";
 import {
   DesktopOutlined,
@@ -54,12 +55,17 @@ function MainLayout(props) {
     <div className={props.class}>
       <Layout style={{ minHeight: "100vh" }}>
         <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
-          <div className='logo'>
-            <Image
-              width={100}
-              src='https://www.freelogodesign.org/Content/img/logo-samples/flooop.png'
-            />
+        <Link to="/">
+          
+          <div mode='inline' className='logo'>
+              <Image
+                width={40}
+                src={LogoImg}
+              />
+              <h1>WTCycle</h1>
           </div>
+          </Link>
+
           <Menu theme='dark' defaultSelectedKeys={["1"]} mode='inline'>
             <Menu.Item key='1' icon={<PieChartOutlined />}>
               <Link to='/'>Dashboard</Link>

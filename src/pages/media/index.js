@@ -63,6 +63,7 @@ const Index = (props) => {
       );
     }
   };
+  
   const beforeUpload = (file) => {
     const isImage = file.type.indexOf("image/") === 0;
     if (!isImage) {
