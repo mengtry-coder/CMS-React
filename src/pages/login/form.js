@@ -43,7 +43,7 @@ const LoginForm = ({ history }) => {
     setLoading(true);
     try {
       await dispatch(actions.requestLogin(credincails));
-      history.push("/");
+      history.push("/admin");
       setLoading(false);
     } catch (e) {
       console.log(e.message);
@@ -59,7 +59,7 @@ const LoginForm = ({ history }) => {
     }
   };
   if (currentUser) {
-    return <Redirect to='/' />;
+    return <Redirect to='/admin' />;
   }
   return (
     <Fragment>

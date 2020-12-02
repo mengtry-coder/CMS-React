@@ -18,7 +18,7 @@
   font-size: 40px;
   margin: 41px 40px;
 }
-img.ant-image-img {
+.logo img.ant-image-img {
   height: auto;
   object-fit: cover;
   margin: 10px 20px;
@@ -51,4 +51,11 @@ img.ant-image-img {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+.pop_menu {
+  margin: 10px;
+  color: black !important;
+}
+.ant-popover-title {
+  text-align: center;
 }
