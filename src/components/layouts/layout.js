@@ -14,6 +14,7 @@ import {
   FileImageOutlined,
   LogoutOutlined,
   FormOutlined,
+  BankOutlined,
   FundViewOutlined,
   UsergroupAddOutlined,
   SettingOutlined,
@@ -59,7 +60,10 @@ function MainLayout(props) {
         <UserOutlined />   Admin
       </div>
       <div className="pop_menu">
-        <Link to="/user/index"><SettingOutlined />   Setting</Link>
+        <Link to="/"><BankOutlined />   Site</Link>
+      </div>
+      <div className="pop_menu">
+        <Link to="/admin//user/index"><SettingOutlined />   Setting</Link>
       </div>
       <div className="pop_menu">
         <Link>

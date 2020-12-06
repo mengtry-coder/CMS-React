@@ -1,11 +1,11 @@
 import React from 'react'
-import FrontendLayout from '../components/layouts/fontendLayout'
+import FrontendLayout from '../components/layouts/frontend'
 
 function index() {
     return (
         <div>
             <FrontendLayout>
-                <p>Body Here</p>
+                home page
             </FrontendLayout>
         </div>
     )

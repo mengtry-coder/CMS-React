@@ -1,0 +1,9 @@
+.top-menu {
+  margin: 30px 50px;
+}
+.ant-col.ant-col-12.menu-title {
+  text-align: right;
+  font-size: 20px;
+  color: white;
+  font-family: system-ui;
+}
