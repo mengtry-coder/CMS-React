@@ -1,14 +1,19 @@
+.container {
+  margin: 50px;
+}
+
 .top-menu {
   position: absolute;
   z-index: 1;
   width: 90%;
+  font-family: ui-sans-serif;
   margin: 50px;
 }
 .ant-col.ant-col-12.menu-title {
   text-align: right;
   font-size: 20px;
   color: white;
-  font-family: system-ui;
+  font-family: ui-sans-serif;
 }
 .ant-col.ant-col-12.menu-logo {
   text-align: left;
@@ -28,18 +33,65 @@ p.brand_title {
 .cover-text {
   position: absolute;
   top: 50%;
-  left: 40%;
+  left: 26%;
+  line-height: 2;
   transform: translate(-50%, -50%);
-  color: white;
-}
-a.view_more {
-  border: 1px solid white;
-  padding: 15px;
-  border-radius: 32px;
   color: white;
 }
 .ant-carousel .slick-slide img {
   display: block;
   height: 700px;
   object-fit: cover;
+}
+a.view_more {
+  border: 1px solid white;
+  padding: 15px;
+  border-radius: 32px;
+  color: #ffffffc7;
+  font-size: 12px;
+  word-spacing: 10px;
+  text-transform: uppercase;
+}
+.social_sharing {
+  color: #ffffffc7;
+  display: flex;
+  font-size: 16px;
+  position: absolute;
+  bottom: 15%;
+  left: 18%;
+}
+.social_media {
+  opacity: 0;
+}
+.social_sharing i {
+  margin-right: 10px;
+}
+i.fal.fa-share-alt:hover + .social_media {
+  opacity: 1;
+  transition: 2s;
+}
+
+/* Body  */
+.about_us {
+  background: black;
+}
+.about_us_feature_image {
+  background: #090909;
+}
+.about_us_feature_image img.ant-image-img {
+  padding: 50px;
+}
+.ant-col.ant-col-19.menu-title {
+  background: black;
+}
+.about_us {
+  color: white;
+}
+.about_us h1 {
+  font-size: 40px;
+  color: white;
+  text-align: right;
+}
+.about_us_detail {
+  padding: 20px 100px;
 }
