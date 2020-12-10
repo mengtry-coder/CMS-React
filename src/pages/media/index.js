@@ -1,6 +1,6 @@
 /** @format */
 import React, { useState, useEffect, useCallback } from "react";
-import { Upload, Pagination, message } from "antd";
+import { Upload, Pagination, message, Input } from "antd";
 import Search from "./search";
 import ImgCrop from "antd-img-crop";
 import MainLayout from "../../components/layouts/layout";
@@ -8,16 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import * as actionMedia from "../../stores/actions/index";
 import Loading from "../../components/UI/spiner/index";
 const Index = (props) => {
-  const [fileList, setFileList] = useState([
-    {
-      uid: "-1",
-      name: "image.png",
-      status: "done",
-      url:
-        "https://travel-informed.co.za/wp-content/uploads/sites/64/2019/01/accommodation.jpg",
-    },
-  ]);
   const [state, setState] = useState({ loading: false, imageUrl: "" });
+  const [dataSource, setDataSource] = useState([]);
   const { medias } = useSelector((state) => state.media);
   const dispatch = useDispatch();
   /**
@@ -130,10 +122,24 @@ const Index = (props) => {
   const onShowSizeChange = (current, pageSize) => {
     console.log(current, pageSize);
   };
-
+  /**
+   * search image by name
+   */
+  const handleSearch = (val) => {
+    const new_arr_data = medias.filter((i) =>
+      i.name.toLowerCase().includes(val.toLowerCase()),
+    );
+    if (val === "") {
+      setDataSource([]);
+    } else {
+      setDataSource(new_arr_data);
+    }
+  };
   return (
     <MainLayout>
-      <Search />
+      <Search>
+        <Input onChange={(e) => handleSearch(e.target.value)} />
+      </Search>
       {state.loading ? (
         <div className='loading'>
           <Loading />
@@ -143,7 +149,7 @@ const Index = (props) => {
           <Upload
             // action='https://www.mocky.io/v2/5cc8019d300000980a055e76'
             listType='picture-card'
-            fileList={medias}
+            fileList={!dataSource.length ? medias : dataSource}
             onChange={onChange}
             beforeUpload={beforeUpload}
             customRequest={handleRequestUploadImage}

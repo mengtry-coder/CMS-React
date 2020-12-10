@@ -2,15 +2,19 @@
 
 import React, { Component } from "react";
 import { Row, Col, Form, Input, Select, Button } from "antd";
-
-const Search = () => {
+import PropTypes from "prop-types";
+const propTypes = {
+  children: PropTypes.node,
+};
+const Search = ({ children }) => {
   const { Option } = Select;
   return (
     <>
       <Row gutter={16}>
         <Col span={8}>
           <Form.Item label='Image Name'>
-            <Input />
+            {/* <Input /> */}
+            {children}
           </Form.Item>
         </Col>
         <Col gutter={2}>
@@ -33,5 +37,5 @@ const Search = () => {
     </>
   );
 };
-
+Search.propTypes = propTypes;
 export default Search;
