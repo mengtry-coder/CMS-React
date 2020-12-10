@@ -63,7 +63,7 @@ const Index = (props) => {
       );
     }
   };
-  
+
   const beforeUpload = (file) => {
     const isImage = file.type.indexOf("image/") === 0;
     if (!isImage) {
@@ -96,12 +96,17 @@ const Index = (props) => {
    */
   const onRemoveMediaSource = async (value) => {
     try {
-      await dispatch(actionMedia.requestRemoveMedia(value.uid));
+      await dispatch(
+        actionMedia.requestDeleteImagefromFirebaseStorage(
+          value.name,
+          value.uid,
+        ),
+      );
       message.success("This image has been removed!!");
     } catch (e) {
       message.error(e.message);
     }
-    console.log(value.uid);
+    // console.log(value.uid);
   };
   /**
    *

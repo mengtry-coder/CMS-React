@@ -13,4 +13,5 @@ export {
   setMediaRequest,
   // requestRemoveMedia,
   requestRemoveMedia,
+  requestDeleteImagefromFirebaseStorage,
 } from "./media";

@@ -105,7 +105,7 @@ export const setMediaRequest = () => {
             new Media(
               id,
               data.name,
-              "done",
+              data.status,
               data.url,
               // data.type,
               // data.size,
@@ -120,17 +120,34 @@ export const setMediaRequest = () => {
     }
   };
 };
-
+/**
+ *
+ * @param {*} id
+ * request delete image from firestore
+ */
 export const requestRemoveMedia = (id) => {
   return async (dispatch) => {
-    firestore
+    await firestore
       .collection("media")
       .doc(id)
-      .update({
-        status: false,
-      })
+      .delete()
       .then(() => {
         dispatch(setMediaRequest());
       });
+  };
+};
+/**
+ *
+ * @param {*} image
+ * @param {*} id
+ * request delete image from firebase storage
+ */
+export const requestDeleteImagefromFirebaseStorage = (image, id) => {
+  return async (dispatch, getState) => {
+    let ref = storage.ref(`media/assets/images/${image}`);
+    await ref.delete().then(async () => {
+      await dispatch(requestRemoveMedia(id));
+      await dispatch(setMediaRequest());
+    });
   };
 };

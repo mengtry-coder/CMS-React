@@ -2,16 +2,12 @@
 
 import React, { Fragment, useState, useContext } from "react";
 import { Redirect } from "react-router";
-import LogoImg from "./../../images/Cms-logo-sample-1.svg"
+import LogoImg from "./../../images/Cms-logo-sample-1.svg";
 import "./styles.css";
-import { Button, Form, Input, Checkbox, Alert, Image } from "antd";
-import {
-  UserOutlined,
-  LockOutlined,
-  PoweroffOutlined,
-} from "@ant-design/icons";
-import lLogin from "../../components/layouts/loginLayout";
-import { useDispatch, useSelector } from "react-redux";
+import { Button, Form, Input, Checkbox, Image } from "antd";
+import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import Login from "../../components/layouts/loginLayout";
+import { useDispatch } from "react-redux";
 import * as actions from "../../stores/actions/index";
 import { AuthContext } from "../authProvider/index";
 const LoginForm = ({ history }) => {
@@ -51,7 +47,6 @@ const LoginForm = ({ history }) => {
     }
   };
   const handleRequestForgotPassword = async (email) => {
-    console.log("this was click");
     try {
       await dispatch(actions.requestForgotPassword(email));
     } catch (e) {
@@ -63,7 +58,7 @@ const LoginForm = ({ history }) => {
   }
   return (
     <Fragment>
-      <lLogin>
+      <Login>
         <Form
           name='normal_login'
           className='login-form'
@@ -72,11 +67,8 @@ const LoginForm = ({ history }) => {
           }}
           onFinish={onFinish}>
           <div mode='inline' className='logo-login'>
-              <Image
-                width={100}
-                src={LogoImg}
-              />
-              <h1>WTCycle</h1>
+            <Image width={100} src={LogoImg} />
+            <h1>WTCycle</h1>
           </div>
           {/* <h1 className='title-center'>Login Form</h1> */}
 
@@ -132,7 +124,7 @@ const LoginForm = ({ history }) => {
             Or <a href='#'>register now!</a>
           </Form.Item>
         </Form>
-      </lLogin>
+      </Login>
     </Fragment>
   );
 };

@@ -1,13 +1,17 @@
-import React from 'react'
+/** @format */
 
-function loginLayout(props) {
-    return (
-        <div className={props.class}>
-            asd
-            {props.children}
-        </div>
-
-    )
+import React from "react";
+import styled from "styled-components";
+import PropTypes from "prop-types";
+const propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.oneOfType([PropTypes.object, PropTypes.element]),
+};
+function loginLayout({ children, className }) {
+  const Container = styled.body`
+    background: "red";
+  `;
+  return <div className={className}>{children}</div>;
 }
-
-export default loginLayout
+loginLayout.propTypes = propTypes;
+export default loginLayout;
