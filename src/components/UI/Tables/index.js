@@ -1,10 +1,9 @@
 /** @format */
 
-import React, { useEffect } from "react";
-import { Table, Button, Modal, message, Space } from "antd";
-import { PlusOutlined, EditFilled, DeleteOutlined } from "@ant-design/icons";
+import React from "react";
+import { Table, Divider } from "antd";
+import { EditFilled, DeleteOutlined } from "@ant-design/icons";
 import { columns } from "../../../data/index";
-import Loading from "../../../components/UI/spiner/index";
 
 import PropTypes from "prop-types";
 const propTypes = {
@@ -12,31 +11,28 @@ const propTypes = {
   onDelete: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   dataSource: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
   loading: PropTypes.bool,
-  id: PropTypes.string,
 };
-const CustomTables = ({ onDelete, onUpdate, loading, dataSource, id }) => {
-  const actions_button = [
-    <EditFilled onClick={onUpdate} />,
-    <DeleteOutlined onClick={onDelete} />,
-  ];
+const CustomTables = ({ onDelete, onUpdate, loading, dataSource }) => {
   const actions = [
     {
       title: "Action",
       dataIndex: "action",
       key: "action",
-      render: () => {
-        return <Space size='small'>{actions_button.map((_, i) => _)}</Space>;
-      },
+      render: (_, record) => (
+        <>
+          <EditFilled onClick={() => onUpdate(record)} />
+          <Divider type='vertical' />
+          <DeleteOutlined onClick={() => onDelete(record)} />
+        </>
+      ),
     },
   ];
   const newColumns = [...columns, ...actions];
   return (
     <Table
-      //   rowSelection={(e) => console.log(e)}
       dataSource={dataSource}
       columns={newColumns}
       loading={loading}
-      //   //   scroll={}
       pagination={{ pageSize: 50 }}
     />
   );

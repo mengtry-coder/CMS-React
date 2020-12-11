@@ -1,16 +1,25 @@
 /** @format */
 import React, { useState, useEffect, useCallback } from "react";
-import { Upload, Pagination, message, Input } from "antd";
+import { Upload, Pagination, message, Input, Modal } from "antd";
 import Search from "./search";
 import ImgCrop from "antd-img-crop";
 import MainLayout from "../../components/layouts/layout";
 import { useDispatch, useSelector } from "react-redux";
 import * as actionMedia from "../../stores/actions/index";
 import Loading from "../../components/UI/spiner/index";
+
 const Index = (props) => {
-  const [state, setState] = useState({ loading: false, imageUrl: "" });
+  const [previewVisible, setPreviewVisible] = useState(false);
+  const [state, setState] = useState({
+    loading: false,
+    imageUrl: "",
+    previewVisible: false,
+    previewImage: "",
+    previewTitle: "",
+  });
   const [dataSource, setDataSource] = useState([]);
   const { medias } = useSelector((state) => state.media);
+
   const dispatch = useDispatch();
   /**
    * fetching media image url from firestore
@@ -84,8 +93,15 @@ const Index = (props) => {
   /**
    *
    * @param {*} value
-   * request update media image
+   * request delete media image from firestore
+   * request delete media image from firebase storage
+   *
    */
+  const onAlertRequestRemoveMedaiSource = (value) => {
+    if (window.confirm(`Are you sure you want to delete ${value.name} ?`)) {
+      onRemoveMediaSource(value);
+    }
+  };
   const onRemoveMediaSource = async (value) => {
     try {
       await dispatch(
@@ -105,20 +121,7 @@ const Index = (props) => {
    * @param {*} file
    * preview image
    */
-  const onPreview = async (file) => {
-    let src = file.url;
-    if (!src) {
-      src = await new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file.originFileObj);
-        reader.onload = () => resolve(reader.result);
-      });
-    }
-    const image = new Image();
-    image.src = src;
-    const imgWindow = window.open(src);
-    imgWindow.document.write(image.outerHTML);
-  };
+
   const onShowSizeChange = (current, pageSize) => {
     console.log(current, pageSize);
   };
@@ -135,6 +138,21 @@ const Index = (props) => {
       setDataSource(new_arr_data);
     }
   };
+  const handlePreview = (file) => {
+    setState({
+      ...state,
+      previewImage: file.url,
+      previewVisible: true,
+      previewTitle:
+        file.name || file.url.substring(file.url.lastIndexOf("/") + 1),
+    });
+  };
+  const handleCancel = () => {
+    setState({
+      ...state,
+      previewVisible: false,
+    });
+  };
   return (
     <MainLayout>
       <Search>
@@ -147,24 +165,29 @@ const Index = (props) => {
       ) : (
         <ImgCrop rotate>
           <Upload
-            // action='https://www.mocky.io/v2/5cc8019d300000980a055e76'
             listType='picture-card'
             fileList={!dataSource.length ? medias : dataSource}
             onChange={onChange}
             beforeUpload={beforeUpload}
             customRequest={handleRequestUploadImage}
-            onRemove={(value) => onRemoveMediaSource(value)}
-            onPreview={onPreview}>
+            onRemove={(value) => onAlertRequestRemoveMedaiSource(value)}
+            onPreview={(file) => handlePreview(file)}>
             {medias.length <= medias.length && "+ Upload"}
           </Upload>
         </ImgCrop>
       )}
-
+      <Modal
+        visible={state.previewVisible}
+        title={state.previewTitle}
+        footer={null}
+        onCancel={handleCancel}>
+        <img alt='example' style={{ width: "100%" }} src={state.previewImage} />
+      </Modal>
       <Pagination
         showSizeChanger
         onShowSizeChange={onShowSizeChange}
         defaultCurrent={3}
-        total={500}
+        total={50}
       />
     </MainLayout>
   );

@@ -1,8 +1,17 @@
 /** @format */
 
 import React, { useState, useEffect, useCallback } from "react";
-import { Layout, Menu, Breadcrumb, Image, Popconfirm, Col, Row, Popover } from "antd";
-import LogoImg from "./../../images/Cms-logo-sample-1.svg"
+import {
+  Layout,
+  Menu,
+  Breadcrumb,
+  Image,
+  Popconfirm,
+  Col,
+  Row,
+  Popover,
+} from "antd";
+import LogoImg from "./../../images/Cms-logo-sample-1.svg";
 import { Link, Redirect } from "react-router-dom";
 import {
   DesktopOutlined,
@@ -56,16 +65,20 @@ function MainLayout(props) {
   const text = "Are you sure to logout?";
   const content = (
     <div>
-      <div className="pop_menu">
-        <UserOutlined />   Admin
+      <div className='pop_menu'>
+        <UserOutlined /> Admin
       </div>
-      <div className="pop_menu">
-        <Link to="/"><BankOutlined />   Site</Link>
+      <div className='pop_menu'>
+        <Link to='/'>
+          <BankOutlined /> Site
+        </Link>
       </div>
-      <div className="pop_menu">
-        <Link to="/admin//user/index"><SettingOutlined />   Setting</Link>
+      <div className='pop_menu'>
+        <Link to='/admin//user/index'>
+          <SettingOutlined /> Setting
+        </Link>
       </div>
-      <div className="pop_menu">
+      <div className='pop_menu'>
         <Link>
           <Popconfirm
             clasasName='btn_logout'
@@ -74,7 +87,7 @@ function MainLayout(props) {
             onConfirm={confirm}
             okText='Yes'
             cancelText='No'>
-            <LogoutOutlined />   Logout
+            <LogoutOutlined /> Logout
           </Popconfirm>
         </Link>
       </div>
@@ -84,23 +97,28 @@ function MainLayout(props) {
     <div className={props.class}>
       <Layout style={{ minHeight: "100vh" }}>
         <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
-        <Link to="/">
-          <div mode='inline' className='logo'>
-              <Image
-                width={40}
-                src={LogoImg}
-                className="logo"
-              />
+          <Link to='/'>
+            <div mode='inline' className='logo'>
+              <Image width={40} src={LogoImg} className='logo' />
               <h1>WTCycle</h1>
-          </div>
+            </div>
           </Link>
 
-          <Menu theme='dark' defaultSelectedKeys={[activeKey]} defaultOpenKeys={['sub1']}
- mode='inline'>
-            <Menu.Item key='1' onClick={() => setActiveKey(1)} icon={<PieChartOutlined />}>
+          <Menu
+            theme='dark'
+            defaultSelectedKeys={[activeKey]}
+            defaultOpenKeys={["sub1"]}
+            mode='inline'>
+            <Menu.Item
+              key='1'
+              onClick={() => setActiveKey(1)}
+              icon={<PieChartOutlined />}>
               <Link to='/admin'>Dashboard</Link>
             </Menu.Item>
-            <Menu.Item key='21' onClick={() => setActiveKey(21)} icon={<FileAddOutlined />}>
+            <Menu.Item
+              key='21'
+              onClick={() => setActiveKey(21)}
+              icon={<FileAddOutlined />}>
               <Link to='/admin/media/index'>Media</Link>
             </Menu.Item>
             <SubMenu key='sub1' icon={<DesktopOutlined />} title='MISC'>
@@ -134,12 +152,12 @@ function MainLayout(props) {
             <Row>
               <Col span={22} />
               <Col span={2}>
-              <Popover content={content} title="Profile">
-                <Image
-                  width={40}
-                  src="https://icon-library.com/images/avatar-icon-images/avatar-icon-images-4.jpg"
-                />
-              </Popover>
+                <Popover content={content} title='Profile'>
+                  <Image
+                    width={40}
+                    src='https://icon-library.com/images/avatar-icon-images/avatar-icon-images-4.jpg'
+                  />
+                </Popover>
               </Col>
             </Row>
           </Header>
