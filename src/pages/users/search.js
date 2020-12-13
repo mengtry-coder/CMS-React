@@ -9,6 +9,7 @@ const Search = () => {
   const { Option } = Select;
   return (
     <>
+    <br></br>
       <Row gutter={16}>
         <Col span={8}>
           <Form.Item label='Name'>

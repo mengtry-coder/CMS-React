@@ -1,4 +1,16 @@
 @import "antd/dist/antd.css";
+.text-right {
+  text-align: right;
+}
+.text-left {
+  text-align: left;
+}
+.text-center {
+  text-align: left;
+}
+.margin-right {
+  margin-right: 5px;
+}
 .logo {
   color: white;
   display: flex;

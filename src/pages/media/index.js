@@ -153,7 +153,7 @@ const Index = (props) => {
             onChange={onChange}
             beforeUpload={beforeUpload}
             customRequest={handleRequestUploadImage}
-            onRemove={(value) => onRemoveMediaSource(value)}
+            onRemove={(value) => console.log(value.uid)}
             onPreview={onPreview}>
             {medias.length <= medias.length && "+ Upload"}
           </Upload>
