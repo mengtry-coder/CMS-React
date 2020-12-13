@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import { Modal, Button, Form, Input, Switch, Row, Col, Image } from 'antd';
-import featureImage from '../../images/upload_image.svg'
+import featureImage from '../../images/upload_image.svg';
+import MediaLibrary from './mediaLibrary'
 const layout = {
   labelCol: {
     span: 8,
@@ -19,6 +20,22 @@ const tailLayout = {
 const UserForm = () => {
   const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(false);
+  // =====Media Modal==
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const showMediaModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleMediaOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleMediaCancel = () => {
+    setIsModalVisible(false);
+  };
+
+  // ====End====
   const showModal = () => {
     setVisible(true);
   };
@@ -32,7 +49,6 @@ const UserForm = () => {
 
   const handleClose = () => {
     setVisible(false);
-    console.log("closed");
   };
   const onFinish = (values) => {
     console.log('Success:', values);
@@ -101,10 +117,20 @@ const UserForm = () => {
             </Col>
             <Col span={7} order={1}>
               <p>Feature Image</p>
-              <Image
+              {/* <Image
                 width={200}
                 src={featureImage}
-             />
+                onClick={showModal}
+             /> */}
+             <img width={200} onClick={showMediaModal} src={featureImage}></img>
+            <Modal
+              title="Select Image"
+              visible={isModalVisible}
+              onOk={handleMediaOk}
+              onCancel={handleMediaCancel}
+            >
+              <MediaLibrary />
+            </Modal>
             </Col>
           </Row>
           </Form>

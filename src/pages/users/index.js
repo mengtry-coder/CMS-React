@@ -39,9 +39,9 @@ const Index = () => {
   const _onDelete = (id) => {
     alert("Are you sure you want to delete this user?");
   };
-  const _onUpdate = (id) => {
+  const _onUpdate = (record) => {
     setVisible(true);
-    console.log(id);
+    console.log(record);
   };
   const showModal = () => {
     setVisible(true);
@@ -62,10 +62,10 @@ const Index = () => {
         <Button type="primary" onClick={showModal}>
           + Add New
         </Button>
-        <br></br>
+        
         <Modal
           visible={visible}
-          title="Title"
+          title="Create User"
           footer={false}
           onOk={handleOk}
           onCancel={handleCancel}

@@ -10,6 +10,7 @@ import {
   Col,
   Row,
   Popover,
+  disabled
 } from "antd";
 import LogoImg from "./../../images/Cms-logo-sample-1.svg";
 import { Link, Redirect } from "react-router-dom";
@@ -98,8 +99,8 @@ function MainLayout(props) {
       <Layout style={{ minHeight: "100vh" }}>
         <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
           <Link to='/'>
-            <div mode='inline' className='logo'>
-              <Image width={40} src={LogoImg} className='logo' />
+            <div mode='inline' className='logo' className='logo'>
+              <img width={40} src={LogoImg} />
               <h1>WTCycle</h1>
             </div>
           </Link>

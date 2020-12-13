@@ -10,6 +10,7 @@ const Search = () => {
   return (
     <>
     <br></br>
+    <br></br>
       <Row gutter={16}>
         <Col span={8}>
           <Form.Item label='Name'>

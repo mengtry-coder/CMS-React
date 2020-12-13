@@ -138,6 +138,9 @@ const Index = (props) => {
       setDataSource(new_arr_data);
     }
   };
+  /**
+   * preview image by pop up modal
+   */
   const handlePreview = (file) => {
     setState({
       ...state,
@@ -156,7 +159,7 @@ const Index = (props) => {
   return (
     <MainLayout>
       <Search>
-        <Input onChange={(e) => handleSearch(e.target.value)} />
+<Input onChange={(e) => handleSearch(e.target.value)} />
       </Search>
       {state.loading ? (
         <div className='loading'>
@@ -170,8 +173,8 @@ const Index = (props) => {
             onChange={onChange}
             beforeUpload={beforeUpload}
             customRequest={handleRequestUploadImage}
-            onRemove={(value) => console.log(value.uid)}
-            onPreview={onPreview}>
+            onRemove={(value) => onAlertRequestRemoveMedaiSource(value)}
+            onPreview={(file) => handlePreview(file)}>
             {medias.length <= medias.length && "+ Upload"}
           </Upload>
         </ImgCrop>
@@ -192,4 +195,4 @@ const Index = (props) => {
     </MainLayout>
   );
 };
-export default Index;
+export default Index
