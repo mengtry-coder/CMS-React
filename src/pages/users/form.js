@@ -1,194 +1,141 @@
-/** @format */
-
-import React, { useState, useEffect, useCallback } from "react";
-import "./styles.css";
-import { Image, Form, Input, Row, Col, Modal, message, Button } from "antd";
-import UploadIcon from "./../../images/upload_image.svg";
-import { InfoCircleOutlined, PlusOutlined } from "@ant-design/icons";
-import * as actions from "../../stores/actions/index";
-import { useDispatch } from "react-redux";
-import PropTypes from "prop-types";
-const propTyes = {
-  visible: PropTypes.bool,
-  onOk: PropTypes.func,
-  onCancel: PropTypes.func,
-  onInputChange: PropTypes.func,
+import React, {useState} from 'react'
+import { Modal, Button, Form, Input, Switch, Row, Col, Image } from 'antd';
+import featureImage from '../../images/upload_image.svg';
+import MediaLibrary from './mediaLibrary'
+const layout = {
+  labelCol: {
+    span: 8,
+  },
+  wrapperCol: {
+    span: 22,
+  },
 };
-const LoginForm = ({ onOk, onCancel }) => {
+const tailLayout = {
+  wrapperCol: {
+    offset: 15,
+    span: 8,
+
+  },
+};
+const UserForm = () => {
   const [visible, setVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
+  // =====Media Modal==
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const [initailState, setInitaiState] = useState({
-    username: "",
-    email: "",
-    password: "",
-    conPassword: "",
-  });
-
-  const dispatch = useDispatch();
-  const onInputChange = useCallback((event) => {
-    switch (event.target.id) {
-      case "username":
-        return setInitaiState({
-          ...initailState,
-          username: event.target.value,
-        });
-      case "email":
-        return setInitaiState({
-          ...initailState,
-          email: event.target.value,
-        });
-      case "pw":
-        return setInitaiState({
-          ...initailState,
-          password: event.target.value,
-        });
-      case "cpw":
-        return setInitaiState({
-          ...initailState,
-          conPassword: event.target.value,
-        });
-      default:
-        return;
-    }
-  }, []);
-
-  const submitHandler = async () => {
-    setVisible(false);
-
-    const credintails = initailState;
-    console.log(credintails);
-    try {
-      await dispatch(actions.requestSignUp(credintails));
-      await dispatch(actions.requestCreateUser(credintails));
-    } catch (e) {
-      console.log(e.messages);
-    }
+  const showMediaModal = () => {
+    setIsModalVisible(true);
   };
-  // useEffect(() => {
-  //   console.log(initailState.email);
-  // }, [onInputChange]);
-  const handleOk = (e) => {
-    message.success("successfull!");
+
+  const handleMediaOk = () => {
+    setIsModalVisible(false);
   };
+
+  const handleMediaCancel = () => {
+    setIsModalVisible(false);
+  };
+
+  // ====End====
   const showModal = () => {
     setVisible(true);
   };
-  // const handleCancel = (e) => {
-  //   setVisible(false);
-  // };
+
+  const handleOk = () => {
+    this.setState({ setLoading: true });
+    setTimeout(() => {
+      this.setState({ setLoading: false, setVisible: false });
+    }, 3000);
+  };
+
+  const handleClose = () => {
+    setVisible(false);
+  };
+  const onFinish = (values) => {
+    console.log('Success:', values);
+  };
+
+  const onFinishFailed = (errorInfo) => {
+    console.log('Failed:', errorInfo);
+  };
   return (
-    <div>
-      <Button className='AddNew' type='primary' onClick={showModal}>
-        <PlusOutlined /> Add New
-      </Button>
-      <Modal
-        title='New User'
-        visible={visible}
-        onOk={submitHandler}
-        onCancel={onCancel}>
-        <Form initialValues={{ remember: true }}>
-          <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 8 }}>
-            <Col className='gutter-row' span={8}>
-              <Col className='gutter-row' span={16}>
-                <Form.Item
-                  label='Feature Image'
-                  tooltip={{
-                    title: "User Profile Picture",
-                    icon: <InfoCircleOutlined />,
-                  }}>
-                  <Image
-                    className='user'
-                    width={100}
-                    height={100}
-                    src={UploadIcon}
-                  />
-                </Form.Item>
-              </Col>
+    <>
+        
+          <Form
+            {...layout}
+            name="basic"
+            initialValues={{
+              remember: true,
+            }}
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+          >
+            <Row>
+            <Col span={17} order={2}>
+              <Row>
+                <Col span={12} order={1}>
+                    <p>Name:</p>
+                    <Form.Item name="name" label={false} required tooltip="This is a required field">
+                    <Input placeholder="Full Name" />
+                  </Form.Item>
+
+                </Col>
+                <Col span={12} order={2}>
+                  <p>Email:</p>
+                  <Form.Item name="email" type="email" label={false} required tooltip="Put Your Real Email">
+                    <Input placeholder="Email" />
+                  </Form.Item>
+                </Col>
+                <Col span={12} order={3}>
+                  <p>Address:</p>
+                  <Form.Item name="address" label={false} tooltip="Your Current Address">
+                    <Input placeholder="Address" />
+                  </Form.Item>
+                </Col>
+                <Col span={12} order={4}>
+                  <p>Phone:</p>
+                  <Form.Item name="phone" label={false} tooltip="Optional">
+                    <Input placeholder="Mobile Phone" />
+                  </Form.Item>
+                </Col>
+                <Col span={24} order={5}>
+                  <p>Status:</p>
+                  <Form.Item name="status" label={false} tooltip="Status">
+                    <Switch defaultChecked />
+                  </Form.Item>
+                </Col>
+                <Col span={24} order={6}>
+                  <Form.Item className="text-right" {...tailLayout}>
+                     <Button className="margin-right" type="secondary" onClick={handleClose}>
+                        Cancel
+                      </Button>
+                      <Button type="primary" htmlType="submit">
+                        Submit
+                      </Button>
+                  </Form.Item>
+                </Col>
+              </Row>
             </Col>
-            <Col className='gutter-row' span={8}>
-              <div>
-                <Col className='gutter-row' span={24}>
-                  <Form.Item
-                    label='Username'
-                    required
-                    tooltip={{
-                      title: "Username will required when login",
-                      icon: <InfoCircleOutlined />,
-                    }}>
-                    <Input
-                      placeholder='username'
-                      id='username'
-                      type='text'
-                      onChange={(e) => onInputChange(e)}
-                    />
-                  </Form.Item>
-                </Col>
-                <Col className='gutter-row' span={24}>
-                  <Form.Item
-                    label='Email'
-                    required
-                    tooltip={{
-                      title: "Put your correct email for forgot password used!",
-                      icon: <InfoCircleOutlined />,
-                    }}>
-                    <Input
-                      placeholder='Email'
-                      type='email'
-                      id='email'
-                      onChange={(e) => onInputChange(e)}
-                    />
-                  </Form.Item>
-                </Col>
-              </div>
-            </Col>
-            <Col className='gutter-row' span={8}>
-              <div>
-                <Col className='gutter-row' span={24}>
-                  <Form.Item
-                    label='Password'
-                    required
-                    rules={[
-                      {
-                        required: true,
-                        message: "Please input your password!",
-                      },
-                    ]}
-                    tooltip={{
-                      title: "Put strong password",
-                      icon: <InfoCircleOutlined />,
-                    }}>
-                    <Input
-                      placeholder='Password'
-                      type='password'
-                      id='pw'
-                      onChange={(e) => onInputChange(e)}
-                    />
-                  </Form.Item>
-                </Col>
-                <Col className='gutter-row' span={24}>
-                  <Form.Item
-                    label='Confirm Password'
-                    required
-                    tooltip={{
-                      title: "Type the the same password from password field!",
-                      icon: <InfoCircleOutlined />,
-                    }}>
-                    <Input
-                      placeholder='Confirm Password'
-                      type='password'
-                      id='cpw'
-                      onChange={(e) => onInputChange(e)}
-                    />
-                  </Form.Item>
-                </Col>
-              </div>
+            <Col span={7} order={1}>
+              <p>Feature Image</p>
+              {/* <Image
+                width={200}
+                src={featureImage}
+                onClick={showModal}
+             /> */}
+             <img width={200} onClick={showMediaModal} src={featureImage}></img>
+            <Modal
+              title="Select Image"
+              visible={isModalVisible}
+              onOk={handleMediaOk}
+              onCancel={handleMediaCancel}
+            >
+              <MediaLibrary />
+            </Modal>
             </Col>
           </Row>
-        </Form>
-      </Modal>
-    </div>
-  );
-  // }
-};
-LoginForm.propTyes = propTyes;
-export default LoginForm;
+          </Form>
+      </>
+  )
+}
+
+export default UserForm
