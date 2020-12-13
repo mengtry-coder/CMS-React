@@ -138,6 +138,9 @@ const Index = (props) => {
       setDataSource(new_arr_data);
     }
   };
+  /**
+   * preview image by pop up modal
+   */
   const handlePreview = (file) => {
     setState({
       ...state,
