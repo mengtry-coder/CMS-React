@@ -91,6 +91,9 @@ const requestFetchMediaSuccess = (media) => {
     payload: media,
   };
 };
+/**
+ *set media request from from firestore
+ */
 export const setMediaRequest = () => {
   return async (dispatch) => {
     try {

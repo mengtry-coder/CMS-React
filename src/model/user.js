@@ -2,7 +2,7 @@
 
 import PropTypes from "prop-types";
 class Users {
-  static PropTypes = {
+  static propTypes = {
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     age: PropTypes.number.isRequired,
@@ -22,5 +22,5 @@ class Users {
     this.address = address;
   }
 }
-Users.PropTypes = PropTypes;
+Users.propTypes = PropTypes;
 export default Users;
