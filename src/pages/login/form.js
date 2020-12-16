@@ -5,6 +5,7 @@ import { Redirect } from "react-router";
 import LogoImg from "./../../images/Cms-logo-sample-1.svg";
 import "./styles.css";
 import { Button, Form, Input, Checkbox, Image } from "antd";
+import { Link } from "react-router-dom";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import Login from "../../components/layouts/loginLayout";
 import { useDispatch } from "react-redux";
@@ -73,6 +74,7 @@ const LoginForm = ({ history }) => {
           {/* <h1 className='title-center'>Login Form</h1> */}
 
           <Form.Item
+            hasFeedback
             name='username'
             rules={[
               {
@@ -87,6 +89,7 @@ const LoginForm = ({ history }) => {
             />
           </Form.Item>
           <Form.Item
+            hasFeedback
             name='password'
             rules={[
               {
@@ -108,7 +111,9 @@ const LoginForm = ({ history }) => {
             <a
               className='login-form-forgot'
               onClick={handleRequestForgotPassword}>
-              Forgot password
+                <Link to='/forgot-password'>
+                  Forgot Password
+                </Link>
             </a>
           </Form.Item>
 
@@ -121,7 +126,6 @@ const LoginForm = ({ history }) => {
               className='login-form-button'>
               Log in
             </Button>
-            Or <a href='#'>register now!</a>
           </Form.Item>
         </Form>
       </Login>

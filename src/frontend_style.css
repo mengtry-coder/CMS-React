@@ -1,3 +1,7 @@
+body {
+  color: white;
+  background: black;
+}
 .container {
   margin: 50px;
 }
@@ -84,14 +88,19 @@ i.fal.fa-share-alt:hover + .social_media {
 .ant-col.ant-col-19.menu-title {
   background: black;
 }
-.about_us {
-  color: white;
-}
-.about_us h1 {
+.about_us .about_us_title h1 {
   font-size: 40px;
-  color: white;
   text-align: right;
 }
 .about_us_detail {
   padding: 20px 100px;
+}
+
+/* Our Service */
+.our_service {
+  background-color: black;
+  color: white;
+}
+.our_service i.fas.fa-donate {
+  font-size: 60px;
 }

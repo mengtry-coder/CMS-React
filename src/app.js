@@ -10,6 +10,7 @@ import Login from "./pages/login/form";
 import User from "./pages/users/index";
 import NotFound from "./pages/404/index";
 import Media from "./pages/media/index";
+import ForgotPassword from "./pages/forgotPassword";
 import Home from "./frontend/index";
 const getBasename = () => `/${process.env.PUBLIC_URL.split("/").pop()}`;
 
@@ -20,6 +21,7 @@ const App = () => {
         <PrivateRoute path='/admin' exact component={Dashboard} />
         <Route path='/' exact component={Home} />
         <Route path='/login' component={Login} />
+        <Route path='/forgot-password' component={ForgotPassword} />
         <PrivateRoute path='/admin/user/index' component={User} />
         <PrivateRoute path='/admin/media/index' component={Media} />
         {/* <Route component={Page404} /> */}
