@@ -77,11 +77,11 @@ const Index = () => {
   /**
    * handle create user to firebase firestore
    */
-  const onSubmit = async (user) => {
+  const onSubmit = async (user, image, status) => {
     setIsLoading(true);
     setVisible(false);
     try {
-      await dispatch(actionsAuth.requestSignUp(user));
+      await dispatch(actionsAuth.requestSignUp(user, image, status));
       setIsLoading(false);
       message.success("Successful");
     } catch (e) {

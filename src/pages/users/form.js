@@ -91,7 +91,7 @@ const UserForm = ({ onCancel, user, onSubmit }) => {
         initialValues={{
           remember: true,
         }}
-        onFinish={(value) => onSubmit(value)}
+        onFinish={(value) => onSubmit(value, state.imageUrl, status)}
         onFinishFailed={onFinishFailed}
       >
         <Row>
@@ -185,7 +185,10 @@ const UserForm = ({ onCancel, user, onSubmit }) => {
               <Col span={24} order={5}>
                 <p>Status:</p>
                 <Form.Item name="status" label={false} tooltip="Status">
-                  <Switch defaultChecked onChange={() => setStatus(!status)} />
+                  <Switch
+                    defaultChecked={status}
+                    onChange={() => setStatus(!status)}
+                  />
                 </Form.Item>
               </Col>
               <Col span={24} order={6}>

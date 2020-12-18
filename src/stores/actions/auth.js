@@ -139,13 +139,13 @@ export const createUserFailure = () => {
   };
 };
 
-export const requestSignUp = (user) => {
+export const requestSignUp = (user, image, status) => {
   return async (dispatch) => {
     await firebase
       .auth()
       .createUserWithEmailAndPassword(user.email, user.password)
       .then(async () => {
-        await dispatch(requestCreateUser(user));
+        await dispatch(requestCreateUser(user, image, status));
       })
       .catch((e) => {
         createUserFailure(e.message);
@@ -156,7 +156,7 @@ export const requestSignUp = (user) => {
 /**
  * request create user
  */
-export const requestCreateUser = (user) => {
+export const requestCreateUser = (user, image, status) => {
   return async (dispatch) => {
     const timestam = firebase.firestore.FieldValue.serverTimestamp();
     await firestore
@@ -166,11 +166,11 @@ export const requestCreateUser = (user) => {
         name: user.name,
         email: user.email,
         address: user.address,
-        avatar: user.url,
+        avatar: image,
         phone: user.phone,
         created_date: timestam,
         updated_date: timestam,
-        status: true,
+        status: status,
       })
       .then(async () => {
         await dispatch(setUser());

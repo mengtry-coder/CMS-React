@@ -60,7 +60,7 @@ const Index = (props) => {
           ...state,
           imageUrl,
           loading: false,
-        }),
+        })
       );
     }
   };
@@ -105,10 +105,7 @@ const Index = (props) => {
   const onRemoveMediaSource = async (value) => {
     try {
       await dispatch(
-        actionMedia.requestDeleteImagefromFirebaseStorage(
-          value.name,
-          value.uid,
-        ),
+        actionMedia.requestDeleteImagefromFirebaseStorage(value.name, value.uid)
       );
       message.success("This image has been removed!!");
     } catch (e) {
@@ -130,7 +127,7 @@ const Index = (props) => {
    */
   const handleSearch = (val) => {
     const new_arr_data = medias.filter((i) =>
-      i.name.toLowerCase().includes(val.toLowerCase()),
+      i.name.toLowerCase().includes(val.toLowerCase())
     );
     if (val === "") {
       setDataSource([]);
@@ -159,22 +156,23 @@ const Index = (props) => {
   return (
     <MainLayout>
       <Search>
-<Input onChange={(e) => handleSearch(e.target.value)} />
+        <Input onChange={(e) => handleSearch(e.target.value)} />
       </Search>
       {state.loading ? (
-        <div className='loading'>
+        <div className="loading">
           <Loading />
         </div>
       ) : (
         <ImgCrop rotate>
           <Upload
-            listType='picture-card'
+            listType="picture-card"
             fileList={!dataSource.length ? medias : dataSource}
             onChange={onChange}
             beforeUpload={beforeUpload}
             customRequest={handleRequestUploadImage}
             onRemove={(value) => onAlertRequestRemoveMedaiSource(value)}
-            onPreview={(file) => handlePreview(file)}>
+            onPreview={(file) => handlePreview(file)}
+          >
             {medias.length <= medias.length && "+ Upload"}
           </Upload>
         </ImgCrop>
@@ -183,8 +181,9 @@ const Index = (props) => {
         visible={state.previewVisible}
         title={state.previewTitle}
         footer={null}
-        onCancel={handleCancel}>
-        <img alt='example' style={{ width: "100%" }} src={state.previewImage} />
+        onCancel={handleCancel}
+      >
+        <img alt="example" style={{ width: "100%" }} src={state.previewImage} />
       </Modal>
       <Pagination
         showSizeChanger
@@ -195,4 +194,4 @@ const Index = (props) => {
     </MainLayout>
   );
 };
-export default Index
+export default Index;
