@@ -72,8 +72,8 @@ export const setRequesUploadMedia = (file) => {
               isActive: 1,
             });
           })
-          .then(() => {
-            dispatch(setMediaRequest());
+          .then(async () => {
+            await dispatch(setMediaRequest());
           });
       });
     } catch (e) {
@@ -109,11 +109,11 @@ export const setMediaRequest = () => {
               id,
               data.name,
               data.status,
-              data.url,
+              data.url
               // data.type,
               // data.size,
               // data.isActive,
-            ),
+            )
           );
         }
         dispatch(requestFetchMediaSuccess(arr_data));

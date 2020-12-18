@@ -41,13 +41,13 @@ export const setUser = () => {
             new User(
               id,
               datax.name,
-              datax.age,
+              datax.gender,
               datax.email,
               datax.phone,
               datax.created_date,
               datax.avatar,
-              datax.address,
-            ),
+              datax.address
+            )
           );
         }
         dispatch(fetchTodSuccess(data));
@@ -139,27 +139,61 @@ export const createUserFailure = () => {
   };
 };
 
-export const requestSignUp = (credintials) => {
+export const requestSignUp = (user) => {
   return async (dispatch) => {
-    console.log(credintials);
     await firebase
       .auth()
-      .createUserWithEmailAndPassword(credintials.email, credintials.password)
-      .then(() => {
-        dispatch(createUserSucess());
+      .createUserWithEmailAndPassword(user.email, user.password)
+      .then(async () => {
+        await dispatch(requestCreateUser(user));
       })
       .catch((e) => {
         createUserFailure(e.message);
+        throw e;
       });
   };
 };
-
-export const requestCreateUser = () => {
-  return async (dipatch) => {
-    const { currentUser } = firebase.auth();
-    const ref = await firebase.firestore().collection("users");
-    const onSnapshot = ref.where("uid", "===", currentUser.uid);
-    if (!onSnapshot.empty) return;
+/**
+ * request create user
+ */
+export const requestCreateUser = (user) => {
+  return async (dispatch) => {
+    const timestam = firebase.firestore.FieldValue.serverTimestamp();
+    await firestore
+      .collection("users")
+      .add({
+        uid: auth.currentUser.uid,
+        name: user.name,
+        email: user.email,
+        address: user.address,
+        avatar: "",
+        phone: user.phone,
+        created_date: timestam,
+        updated_date: timestam,
+        status: true,
+      })
+      .then(async () => {
+        await dispatch(setUser());
+      })
+      .catch((e) => {
+        throw e;
+      });
+  };
+};
+/**
+ *
+ * @param {*} email
+ * request delete user from firebase
+ */
+export const requestDeleteUser = (id) => {
+  return async (dispatch) => {
+    await firestore
+      .collection("users")
+      .doc(id)
+      .delete()
+      .then(async () => {
+        await dispatch(setUser());
+      });
   };
 };
 
@@ -174,6 +208,30 @@ export const requestForgotPassword = (email) => {
       })
       .catch((e) => {
         console.log(e.message);
+      });
+  };
+};
+
+/**
+ * request update usr info
+ */
+
+export const requestUpdate = (user, id) => {
+  return async (dispatch) => {
+    firestore
+      .collection("users")
+      .doc(id)
+      .update({
+        name: user.name,
+        email: user.email,
+        address: user.address,
+        phone: user.phone,
+      })
+      .then(async () => {
+        await dispatch(setUser());
+      })
+      .catch((e) => {
+        throw e;
       });
   };
 };

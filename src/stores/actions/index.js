@@ -3,10 +3,12 @@
 export {
   setUser,
   requestLogin,
-  requestLogout,
   requestSignUp,
+  requestLogout,
+  requestDeleteUser,
   requestCreateUser,
   requestForgotPassword,
+  requestUpdate,
 } from "./auth";
 export {
   setRequesUploadMedia,

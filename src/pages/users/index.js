@@ -6,9 +6,7 @@ import "./styles.css";
 import { useDispatch, useSelector } from "react-redux";
 import CreateUserForm from "./form";
 import Search from "./search";
-import { Table, Button, Modal, message, Space } from "antd";
-import { PlusOutlined, EditFilled, DeleteOutlined } from "@ant-design/icons";
-import { columns } from "../../data/index";
+import { Button, Modal, message } from "antd";
 import Loading from "../../components/UI/spiner/index";
 import PropTypes from "prop-types";
 import MainLayout from "../../components/layouts/layout";
@@ -20,6 +18,7 @@ const propTypes = {
 const Index = () => {
   const [visible, setVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [userData, setUserData] = useState({});
   const users = useSelector((state) => state.auth.users);
   const alertRef = useRef();
   const dispatch = useDispatch();
@@ -36,25 +35,59 @@ const Index = () => {
       setIsLoading(false);
     });
   }, [fetchUserFromFirestore]);
-  const _onDelete = (id) => {
-    alert("Are you sure you want to delete this user?");
+  /**
+   *
+   * @param {*} user
+   * handle delete user from firebase firestore
+   */
+  const _onDelete = async (user) => {
+    setIsLoading(true);
+    try {
+      if (window.confirm(`Are you sure you want to delete ${user.name}?`)) {
+        await dispatch(actionsAuth.requestDeleteUser(user.id));
+        setIsLoading(false);
+      }
+    } catch (e) {
+      message.error(e.message);
+      setIsLoading(false);
+    }
   };
-  const _onUpdate = (record) => {
-    setVisible(true);
-    console.log(record);
-  };
+  /**
+   * handle update user info
+   */
+  const _onUpdate = useCallback(
+    (record) => {
+      setVisible(true);
+      setUserData(record);
+    },
+    [setUserData]
+  );
+
   const showModal = () => {
     setVisible(true);
   };
   const handleCancel = () => {
     setVisible(false);
+    console.log("Hello");
   };
-  
+
   const handleOk = () => {
-    this.setState({ setLoading: true });
-    setTimeout(() => {
-      this.setState({ setLoading: false, setVisible: false });
-    }, 3000);
+    setVisible(false);
+  };
+  /**
+   * handle create user to firebase firestore
+   */
+  const onSubmit = async (user) => {
+    setIsLoading(true);
+    setVisible(false);
+    try {
+      await dispatch(actionsAuth.requestSignUp(user));
+      setIsLoading(false);
+      message.success("Successful");
+    } catch (e) {
+      message.error(e.message);
+      setIsLoading(false);
+    }
   };
   return (
     <div>
@@ -62,7 +95,7 @@ const Index = () => {
         <Button type="primary" onClick={showModal}>
           + Add New
         </Button>
-        
+
         <Modal
           visible={visible}
           title="Create User"
@@ -70,7 +103,11 @@ const Index = () => {
           onOk={handleOk}
           onCancel={handleCancel}
         >
-          <CreateUserForm />
+          <CreateUserForm
+            onCancel={handleCancel}
+            user={userData}
+            onSubmit={onSubmit}
+          />
         </Modal>
         <Search />
         <br></br>

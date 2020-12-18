@@ -11,10 +11,10 @@ class Users {
     password: PropTypes.number,
     address: PropTypes.string,
   };
-  constructor(id, name, age, email, phone, created_date, avatar, address) {
+  constructor(id, name, gender, email, phone, created_date, avatar, address) {
     this.id = id;
     this.name = name;
-    this.age = age;
+    this.gender = gender;
     this.email = email;
     this.phone = phone;
     this.created_date = created_date;
