@@ -166,7 +166,7 @@ export const requestCreateUser = (user) => {
         name: user.name,
         email: user.email,
         address: user.address,
-        avatar: "",
+        avatar: user.url,
         phone: user.phone,
         created_date: timestam,
         updated_date: timestam,

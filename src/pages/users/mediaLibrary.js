@@ -4,7 +4,11 @@ import { Upload, message } from "antd";
 import { useSelector } from "react-redux";
 import * as action from "../../stores/actions/index";
 import { useDispatch } from "react-redux";
-const MediaLibrary = () => {
+import ProTyope from "prop-types";
+const proTypes = {
+  onSelectImage: ProTyope.func,
+};
+const MediaLibrary = ({ onSelectImage }) => {
   const [state, setState] = useState({
     loading: false,
     imageUrl: "",
@@ -92,6 +96,10 @@ const MediaLibrary = () => {
     const imgWindow = window.open(src);
     imgWindow.document.write(image.outerHTML);
   };
+  const onClickImage = (value) => {
+    // alert("Hello");
+    console.log(value);
+  };
   return (
     <div>
       <ImgCrop rotate>
@@ -100,7 +108,7 @@ const MediaLibrary = () => {
           listType="picture-card"
           fileList={medias}
           onChange={onChange}
-          onPreview={onPreview}
+          onPreview={(value) => onSelectImage(value)}
           customRequest={handleRequestUploadImage}
           beforeUpload={beforeUpload}
         >
@@ -110,5 +118,5 @@ const MediaLibrary = () => {
     </div>
   );
 };
-
+MediaLibrary.proTypes = proTypes;
 export default MediaLibrary;

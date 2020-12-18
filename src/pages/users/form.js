@@ -1,15 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Modal,
-  Button,
-  Form,
-  Input,
-  Switch,
-  Row,
-  Col,
-  Image,
-  message,
-} from "antd";
+import { Modal, Button, Form, Input, Switch, Row, Col, message } from "antd";
 import featureImage from "../../images/upload_image.svg";
 import MediaLibrary from "./mediaLibrary";
 import PropType from "prop-types";
@@ -44,6 +34,7 @@ const UserForm = ({ onCancel, user, onSubmit }) => {
     email: "",
     address: "",
     phone: "",
+    imageUrl: "",
   });
   const dispatch = useDispatch();
   // =====Media Modal==
@@ -75,6 +66,7 @@ const UserForm = ({ onCancel, user, onSubmit }) => {
       email: user.email,
       address: user.address,
       phone: user.phone,
+      imageUrl: featureImage,
     });
   }, [user]);
   const submitRequestUpdate = async (users) => {
@@ -84,7 +76,13 @@ const UserForm = ({ onCancel, user, onSubmit }) => {
       message.error(e.message);
     }
   };
-
+  const onSeleceImageUri = (value) => {
+    setIsModalVisible(false);
+    setState({
+      ...state,
+      imageUrl: value.url,
+    });
+  };
   return (
     <>
       <Form
@@ -213,14 +211,19 @@ const UserForm = ({ onCancel, user, onSubmit }) => {
                 src={featureImage}
                 onClick={showModal}
              /> */}
-            <img width={200} onClick={showMediaModal} src={featureImage}></img>
+            <img
+              width={200}
+              onClick={showMediaModal}
+              src={state.imageUrl}
+            ></img>
             <Modal
               title="Select Image"
               visible={isModalVisible}
               onOk={handleMediaOk}
               onCancel={handleMediaCancel}
+              footer={false}
             >
-              <MediaLibrary />
+              <MediaLibrary onSelectImage={onSeleceImageUri} />
             </Modal>
           </Col>
         </Row>
