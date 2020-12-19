@@ -111,7 +111,7 @@ const LoginForm = ({ history }) => {
             <a
               className='login-form-forgot'
               onClick={handleRequestForgotPassword}>
-                <Link to='/forgot-password'>
+                <Link to='/confirm-email'>
                   Forgot Password
                 </Link>
             </a>

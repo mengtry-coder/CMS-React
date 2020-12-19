@@ -1,10 +1,9 @@
 import React from 'react';
-import "../../frontend_style.css";
+import "../../frontend_style.scss";
 import Logo from "./../../images/Cms-logo-sample-1.svg";
-import { Row, Col, Image, Button, Divider, Carousel } from "antd";
+import { Row, Col, Image, Button, Space } from "antd";
 import {
-    MenuFoldOutlined,
-    RightCircleOutlined
+    MinusOutlined,
   } from "@ant-design/icons";
 
 function frontend(props) {
@@ -22,7 +21,45 @@ function frontend(props) {
                 </Row>
             </div>
               {props.children}
-            Footer Here
+            <div className="footer container mt-5 mb-5">
+                <Row>
+                    <Col span={6} order={1}>
+                        <h3 className="text-light">WTCycle</h3>
+                        <Space size={20}>
+                            <i class="fab fa-facebook-f outline-social"></i>
+                            <i class="fab fa-facebook-messenger outline-social"></i>
+                            <i class="fab fa-telegram-plane outline-social"></i>
+                        </Space>
+                    </Col>
+                    <Col span={6} order={2}>
+                        <h3 className="text-light">Navigation</h3>
+                        <MinusOutlined /><br></br>
+                        <a>PORTFOLIO</a><br></br>
+                        <a>ABOUT</a><br></br>
+                        <a>NEWS</a><br></br>
+                        <a>CONTACT</a><br></br>
+                    </Col>
+                    <Col span={6} order={3}>
+                        <h3 className="text-light">Navigation</h3>
+                        <MinusOutlined /><br></br>
+                        <b>T</b> : 086 293 500 <br></br>
+                        <b>F</b> : 023 293 500 <br></br>
+                        <b>T</b> : info@wtcycle.com
+                    </Col>
+                    <Col span={6} order={4}>
+                        <h3 className="text-light">Address</h3>
+                        <MinusOutlined />
+                        <p>Jomkamon-Keng Kong I- Pnom Penh <br></br>Cambodia</p>
+                    </Col>
+                </Row>
+                <hr className="text-light"></hr>
+                <div className="mt-5 mb-5">
+                    <p className="text-center">
+                        2020 WEB TECHNOLOYG CYCLE | WEB APPLICATION | WEB DESIGN | UX/UI DESIGN <br></br>
+                        Design By WTCycle Team
+                    </p>
+                </div>
+            </div>
         </div>
     )
 }
