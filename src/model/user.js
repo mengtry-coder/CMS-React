@@ -11,15 +11,15 @@ class Users {
     password: PropTypes.number,
     address: PropTypes.string,
   };
-  constructor(id, name, gender, email, phone, created_date, avatar, address) {
+  constructor(id, name, email, phone, created_date, avatar, address, uid) {
     this.id = id;
     this.name = name;
-    this.gender = gender;
     this.email = email;
     this.phone = phone;
+    this.avatar = avatar;
     this.created_date = created_date;
-    this.created_date = avatar;
     this.address = address;
+    this.uid = uid;
   }
 }
 Users.propTypes = PropTypes;

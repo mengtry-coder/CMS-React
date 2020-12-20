@@ -14,8 +14,10 @@ const {
   LOGOUT_REQUEST_SUCCESS,
   CREATE_USER_FIALURE,
   CREATE_USER_SUCCESS,
+  SET_CURRENT_USER_FAILURE,
+  SET_CURRENT_USER_SUCCESS,
 } = type.User;
-export const fetchTodSuccess = (data) => {
+export const fetchUserSuccess = (data) => {
   return {
     type: FETCH_USER_SUCCESS,
     payload: data,
@@ -27,7 +29,7 @@ export const fetchUserFailure = (message) => {
     payload: message,
   };
 };
-export const setUser = () => {
+export const setUser = (uid) => {
   return async (dispatch, getState) => {
     try {
       const ref = firestore.collection("users");
@@ -41,16 +43,20 @@ export const setUser = () => {
             new User(
               id,
               datax.name,
-              datax.gender,
               datax.email,
               datax.phone,
               datax.created_date,
               datax.avatar,
-              datax.address
+              datax.address,
+              datax.uid
             )
           );
         }
-        dispatch(fetchTodSuccess(data));
+        if (uid) {
+          const currentUser = data.filter((user) => user.uid === uid);
+          dispatch(fetchCurrentUserSuccess(currentUser));
+        }
+        dispatch(fetchUserSuccess(data));
       }
     } catch (e) {
       dispatch(fetchUserFailure(e.message));
@@ -58,6 +64,13 @@ export const setUser = () => {
     }
   };
 };
+export const fetchCurrentUserSuccess = (data) => {
+  return {
+    type: SET_CURRENT_USER_SUCCESS,
+    payload: data,
+  };
+};
+
 /**
  * handle user login successfull
  * return type success
@@ -87,7 +100,7 @@ export const requestLogin = (credintials) => {
     await firebase
       .auth()
       .signInWithEmailAndPassword(credintials.email, credintials.password)
-      .then(() => {
+      .then(async () => {
         dispatch(onUserRequestLoginSuccess());
       })
       .catch((e) => dispatch(onUserRequestLoginFailure(e.message)));
@@ -197,13 +210,12 @@ export const requestDeleteUser = (id) => {
   };
 };
 
-export const requestForgotPassword = (email) => {
+export const requestForgotPassword = (user) => {
   return async (dispatch, getState) => {
     await firebase
       .auth()
-      .sendPasswordResetEmail(email)
+      .sendPasswordResetEmail(user.email)
       .then((user) => {
-        alert("Please check your email...");
         console.log(user);
       })
       .catch((e) => {
