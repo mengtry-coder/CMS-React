@@ -104,7 +104,6 @@ i.fal.fa-share-alt:hover + .social_media {
   font-size: 60px;
 }
 .ant-col-12.about_us_feature_image {
-  padding: 50px 30px;
   background: #242020;
 }
 
@@ -124,6 +123,9 @@ i.fal.fa-share-alt:hover + .social_media {
   .description-training {
     height: 900px;
     background: #000000b8;
+    .how_we {
+      margin-top: 50%;
+    }
   }
 }
 
@@ -133,4 +135,27 @@ i.fal.fa-share-alt:hover + .social_media {
   padding: 10px 12px;
   border-radius: 16px;
   cursor: pointer;
+}
+
+.portfolio_img .ant-image-img {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  position: relative;
+}
+.portfolio_item {
+  .overlay {
+    background-color: #00000059;
+    position: absolute;
+    height: 100%;
+    top: 0;
+    width: 100%;
+  }
+  .portfolio_title {
+    position: absolute;
+    bottom: 0%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+  }
 }

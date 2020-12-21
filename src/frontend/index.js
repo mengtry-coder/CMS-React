@@ -144,20 +144,58 @@ function index() {
                         <Row>
                             <Col span={12} order={1} />
                             <Col className="description-training container center px-5" span={12} order={2}>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <h1 className="text-light">How we <br></br>provide Training?</h1>
-                                <p className="px-5">Spacing utilities that apply to all breakpoints, from xs to xxl, have no breakpoint abbreviation in them. This is because those classes are applied from min-width: 0 and up, and thus are not bound by a media query. The remaining breakpoints, however, do include a breakpoint abbreviation.</p>
-                                <br></br><br></br><a className="view_more" href=""><i class="fas fa-chevron-circle-right"></i>   View More</a>
+                                <div className="how_we">
+                                    <h1 className="text-light">How we <br></br>provide Training?</h1>
+                                    <p className="px-5">Spacing utilities that apply to all breakpoints, from xs to xxl, have no breakpoint abbreviation in them. This is because those classes are applied from min-width: 0 and up, and thus are not bound by a media query. The remaining breakpoints, however, do include a breakpoint abbreviation.</p>
+                                    <br></br><br></br><a className="view_more" href=""><i class="fas fa-chevron-circle-right"></i>   View More</a>
+                                </div>
+                            </Col>
+                        </Row>
+                    </div>
+                    <div className="portfolio">
+                        <div className="mt-5 mb-5 container">
+                            <li>PORTFOLIO</li>
+                            <h1 className="text-light">New Template For More Options</h1>
+                        </div>
+                        <Row gutter={[24, 16]}>
+                            <Col span={8} order={1}>
+                                <div className="portfolio_item text-center">
+                                    <Image
+                                        className="portfolio_img"
+                                        src="https://dmm40cf0lyret.cloudfront.net/wp-content/uploads/2020/08/disen%CC%83o-pa%CC%81ginas-web.jpg"
+                                    />
+                                    <div className="overlay" />
+                                    <div className="portfolio_title">
+                                        <p>E-Comerce</p>
+                                        <h2 className="text-light">Selling - Shopping</h2>
+                                    </div>
+                                </div>
+                            </Col>
+                            <Col span={8} order={1}>
+                                <div className="portfolio_item text-center">
+                                    <Image
+                                        className="portfolio_img"
+                                        src="https://guerillacreativemarketing.com/wp-content/uploads/2019/07/Web-Design-Development-Advanced-Based.jpg"
+                                    />
+                                    <div className="overlay" />
+                                    <div className="portfolio_title">
+                                        <p>E-Comerce</p>
+                                        <h2 className="text-light">Selling - Shopping</h2>
+                                    </div>
+                                </div>
+                            </Col>
+                            <Col span={8} order={1}>
+                                <div className="portfolio_item text-center">
+                                    <Image
+                                        className="portfolio_img"
+                                        src="https://images.anytask.com/ae88a70249b27abd/gig/wr7b5ojurdycsv2qsgbj.png"
+                                    />
+                                    <div className="overlay" />
+                                    <div className="portfolio_title">
+                                        <p>E-Comerce</p>
+                                        <h2 className="text-light">Selling - Shopping</h2>
+                                    </div>
+                                </div>
                             </Col>
                         </Row>
                     </div>
