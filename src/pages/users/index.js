@@ -68,7 +68,6 @@ const Index = () => {
   };
   const handleCancel = () => {
     setVisible(false);
-    console.log("Hello");
   };
 
   const handleOk = () => {

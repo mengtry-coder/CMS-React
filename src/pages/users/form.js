@@ -28,13 +28,14 @@ const tailLayout = {
 const UserForm = ({ onCancel, user, onSubmit }) => {
   const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [status, setStatus] = useState(false);
+  const [status, setStatus] = useState(true);
   const [state, setState] = useState({
     name: "",
     email: "",
     address: "",
     phone: "",
     imageUrl: "",
+    userData: [],
   });
   const dispatch = useDispatch();
   // =====Media Modal==
@@ -60,14 +61,21 @@ const UserForm = ({ onCancel, user, onSubmit }) => {
     console.log("Failed:", errorInfo);
   };
   useEffect(() => {
-    setState({
-      ...state,
-      name: user.name,
-      email: user.email,
-      address: user.address,
-      phone: user.phone,
-      imageUrl: featureImage,
-    });
+    if (user) {
+      setState({
+        ...state,
+        name: user.name,
+        email: user.email,
+        address: user.address,
+        phone: user.phone,
+        imageUrl: featureImage,
+        userData: user,
+      });
+    } else {
+      setState({
+        userData: [],
+      });
+    }
   }, [user]);
   const submitRequestUpdate = async (users) => {
     try {
@@ -83,6 +91,51 @@ const UserForm = ({ onCancel, user, onSubmit }) => {
       imageUrl: value.url,
     });
   };
+  const RenderInputPassword = () => (
+    <React.Fragment>
+      <Col span={12} order={4}>
+        <p>Password:</p>
+        <Form.Item
+          hasFeedback
+          rules={[{ required: true, message: "Password can not be blank!" }]}
+          name="password"
+          type="password"
+          label={false}
+          tooltip="Enter Strong Password"
+        >
+          <Input.Password placeholder="Password" />
+        </Form.Item>
+      </Col>
+      <Col span={12} order={4}>
+        <p>Confirm Password:</p>
+        <Form.Item
+          name="confirm"
+          label={false}
+          dependencies={["password"]}
+          hasFeedback
+          rules={[
+            {
+              required: true,
+              message: "Please confirm your password!",
+            },
+            ({ getFieldValue }) => ({
+              validator(rule, value) {
+                if (!value || getFieldValue("password") === value) {
+                  return Promise.resolve();
+                }
+
+                return Promise.reject(
+                  "The two passwords that you entered do not match!"
+                );
+              },
+            }),
+          ]}
+        >
+          <Input.Password placeholder="Re-enter Password" />
+        </Form.Item>
+      </Col>
+    </React.Fragment>
+  );
   return (
     <>
       <Form
@@ -104,6 +157,9 @@ const UserForm = ({ onCancel, user, onSubmit }) => {
                   label={false}
                   required
                   tooltip="This is a required field"
+                  rules={[
+                    { required: true, message: "Name can not be blank!" },
+                  ]}
                 >
                   <Input placeholder="Full Name" value={state.name} />
                 </Form.Item>
@@ -116,6 +172,9 @@ const UserForm = ({ onCancel, user, onSubmit }) => {
                   label={false}
                   required
                   tooltip="Put Your Real Email"
+                  rules={[
+                    { required: true, message: "Email can not be blank!" },
+                  ]}
                 >
                   <Input placeholder="Email" value={state.email} />
                 </Form.Item>
@@ -126,62 +185,30 @@ const UserForm = ({ onCancel, user, onSubmit }) => {
                   name="address"
                   label={false}
                   tooltip="Your Current Address"
+                  rules={[
+                    { required: true, message: "Addres can not be blank!" },
+                  ]}
                 >
                   <Input placeholder="Address" value={state.address} />
                 </Form.Item>
               </Col>
               <Col span={12} order={4}>
                 <p>Phone:</p>
-                <Form.Item name="phone" label={false} tooltip="Optional">
+                <Form.Item
+                  name="phone"
+                  label={false}
+                  tooltip="Optional"
+                  rules={[
+                    { required: true, message: "Phone can not be blank!" },
+                  ]}
+                >
                   <Input
                     placeholder={state.phone ? state.phone : "Mobile Phone"}
                     value={state.phone}
                   />
                 </Form.Item>
               </Col>
-              <Col span={12} order={4}>
-                <p>Password:</p>
-                <Form.Item
-                  hasFeedback
-                  rules={[
-                    { required: true, message: "Password can not be blank!" },
-                  ]}
-                  name="password"
-                  type="password"
-                  label={false}
-                  tooltip="Enter Strong Password"
-                >
-                  <Input.Password placeholder="Password" />
-                </Form.Item>
-              </Col>
-              <Col span={12} order={4}>
-                <p>Confirm Password:</p>
-                <Form.Item
-                  name="confirm"
-                  label={false}
-                  dependencies={["password"]}
-                  hasFeedback
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please confirm your password!",
-                    },
-                    ({ getFieldValue }) => ({
-                      validator(rule, value) {
-                        if (!value || getFieldValue("password") === value) {
-                          return Promise.resolve();
-                        }
-
-                        return Promise.reject(
-                          "The two passwords that you entered do not match!"
-                        );
-                      },
-                    }),
-                  ]}
-                >
-                  <Input.Password placeholder="Re-enter Password" />
-                </Form.Item>
-              </Col>
+              {!state.userData.length && RenderInputPassword()}
               <Col span={24} order={5}>
                 <p>Status:</p>
                 <Form.Item name="status" label={false} tooltip="Status">

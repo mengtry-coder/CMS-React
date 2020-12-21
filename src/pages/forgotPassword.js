@@ -16,7 +16,7 @@ const tailLayout = {
   },
 };
 
-function ForgotPassword() {
+const ForgotPassword = () => {
   const onFinish = (values) => {
     console.log("Success:", values);
   };
@@ -31,7 +31,7 @@ function ForgotPassword() {
           <Form
             {...layout}
             name="normal_login"
-            onFinish={onFinish}
+            onFinish={(value) => onFinish(value)}
             onFinishFailed={onFinishFailed}
             className="login-form"
           >
@@ -84,6 +84,6 @@ function ForgotPassword() {
       </LoginLayout>
     </div>
   );
-}
+};
 
 export default ForgotPassword;
