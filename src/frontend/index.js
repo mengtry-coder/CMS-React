@@ -8,7 +8,7 @@ import {
   } from "@ant-design/icons";
 function index() {
     return (
-        <div>
+        <div className="frontend-body">
             <ParallaxProvider>
                 <FrontendLayout>
                 <div className="cover-image">
@@ -33,7 +33,7 @@ function index() {
                                     <ParallaxBanner
                                         layers={[
                                             {
-                                                image: "https://wallup.net/wp-content/uploads/2017/11/17/230769-luxury_watches-watch.jpg",
+                                                image: "https://mockuptree.com/wp-content/uploads/edd/2019/07/free-macbook-air-mock-up.jpg",
                                                 amount: 0.1,
                                             },
                                         ]}

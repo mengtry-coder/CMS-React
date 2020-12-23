@@ -4,7 +4,9 @@ $fontFamilyTitle: sans-serif;
 
 body {
   color: white;
-  background: $bgColor !important;
+}
+.frontend-body {
+  background: $bgColor;
 }
 
 .top-menu {

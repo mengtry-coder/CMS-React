@@ -40,7 +40,7 @@ function frontend(props) {
                         <a>CONTACT</a><br></br>
                     </Col>
                     <Col span={6} order={3}>
-                        <h3 className="text-light">Navigation</h3>
+                        <h3 className="text-light">Get In Touch</h3>
                         <MinusOutlined /><br></br>
                         <b>T</b> : 086 293 500 <br></br>
                         <b>F</b> : 023 293 500 <br></br>
