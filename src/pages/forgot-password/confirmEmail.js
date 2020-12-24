@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Form, Input, message } from "antd";
 import LoginLayout from "../../components/layouts/loginLayout";
 import * as authActions from "../../stores/actions/index";
+import firebase from "../../utils/firebase";
 import { useDispatch } from "react-redux";
 const layout = {
   labelCol: {
@@ -26,11 +27,20 @@ const ForgotPassword = () => {
    * dispatch request sent email to firebase server
    */
   const onFinish = async (values) => {
-    try {
-      await dispatch(authActions.requestForgotPassword(values));
-      message.success("Check your email to access reset password!");
-    } catch (e) {
-      message.error(e.message);
+    const ref = firebase
+      .firestore()
+      .collection("users")
+      .where("email", "==", values.email);
+    const onSnapshot = await ref.get();
+    if (!onSnapshot.empty) {
+      try {
+        await dispatch(authActions.requestForgotPassword(values));
+        message.success("Check your email to access reset password!");
+      } catch (e) {
+        message.error(e.message);
+      }
+    } else {
+      message.error("Email not match!");
     }
   };
 

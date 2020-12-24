@@ -1,4 +1,20 @@
 /** @format */
+
+export const layout = {
+  labelCol: {
+    span: 8,
+  },
+  wrapperCol: {
+    span: 22,
+  },
+};
+export const tailLayout = {
+  wrapperCol: {
+    offset: 15,
+    span: 8,
+  },
+};
+
 /**
  * todo redux type
  */

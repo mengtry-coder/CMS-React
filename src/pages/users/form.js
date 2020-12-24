@@ -1,48 +1,67 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, Fragment } from "react";
 import { Modal, Button, Form, Input, Switch, Row, Col, message } from "antd";
 import featureImage from "../../images/upload_image.svg";
 import MediaLibrary from "./mediaLibrary";
 import PropType from "prop-types";
 import * as actionUser from "../../stores/actions/index";
 import { useDispatch } from "react-redux";
+import { layout, tailLayout } from "../../constants/index";
 const propTypes = {
   onSubmit: PropType.func,
   onCancel: PropType.func,
   user: PropType.oneOfType([PropType.object, PropType.array]),
-};
-const layout = {
-  labelCol: {
-    span: 8,
-  },
-  wrapperCol: {
-    span: 22,
-  },
-};
-const tailLayout = {
-  wrapperCol: {
-    offset: 15,
-    span: 8,
-  },
+  onShowModal: PropType.func,
+  onUpdate: PropType.bool,
 };
 
-const UserForm = ({ onCancel, user, onSubmit }) => {
+const UserForm = ({ onCancel, user, onSubmit, onShowModal, onUpdate }) => {
   const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState(true);
+  const [isUpdate, setIsUpdate] = useState(false);
+  const [image, setImage] = useState(null);
   const [state, setState] = useState({
     name: "",
     email: "",
     address: "",
     phone: "",
     imageUrl: "",
+    password: "",
+    con_password: "",
     userData: [],
   });
+  const [form] = Form.useForm();
+  const updateValue = () => {
+    form.setFieldsValue({
+      email: user.email,
+      name: user.name,
+      address: user.address,
+      phone: user.phone,
+    });
+  };
+  const addNewValue = () => {
+    form.setFieldsValue({
+      email: "",
+      name: "",
+      address: "",
+      phone: "",
+    });
+  };
+  useEffect(() => {
+    if (onUpdate === true) {
+      updateValue();
+      const avatar = !user.avatar ? featureImage : user.avatar;
+      setImage(avatar);
+    } else {
+      addNewValue();
+    }
+  }, [onShowModal]);
   const dispatch = useDispatch();
   // =====Media Modal==
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const showMediaModal = () => {
+  const showMediaModal = useCallback(() => {
     setIsModalVisible(true);
-  };
+  }, []);
 
   const handleMediaOk = () => {
     setIsModalVisible(false);
@@ -69,6 +88,8 @@ const UserForm = ({ onCancel, user, onSubmit }) => {
         address: user.address,
         phone: user.phone,
         imageUrl: featureImage,
+        password: "",
+        con_password: "",
         userData: user,
       });
     } else {
@@ -76,7 +97,7 @@ const UserForm = ({ onCancel, user, onSubmit }) => {
         userData: [],
       });
     }
-  }, [user]);
+  }, [onShowModal]);
   const submitRequestUpdate = async (users) => {
     try {
       await dispatch(actionUser.requestUpdate(users, user.id));
@@ -86,13 +107,10 @@ const UserForm = ({ onCancel, user, onSubmit }) => {
   };
   const onSeleceImageUri = (value) => {
     setIsModalVisible(false);
-    setState({
-      ...state,
-      imageUrl: value.url,
-    });
+    setImage(value.url);
   };
-  const RenderInputPassword = () => (
-    <React.Fragment>
+  const RenderFormPassword = () => (
+    <Fragment>
       <Col span={12} order={4}>
         <p>Password:</p>
         <Form.Item
@@ -134,17 +152,19 @@ const UserForm = ({ onCancel, user, onSubmit }) => {
           <Input.Password placeholder="Re-enter Password" />
         </Form.Item>
       </Col>
-    </React.Fragment>
+    </Fragment>
   );
+
   return (
     <>
       <Form
+        form={form}
         {...layout}
         name="basic"
         initialValues={{
           remember: true,
         }}
-        onFinish={(value) => onSubmit(value, state.imageUrl, status)}
+        onFinish={(value) => onSubmit(value, image, status)}
         onFinishFailed={onFinishFailed}
       >
         <Row>
@@ -189,7 +209,7 @@ const UserForm = ({ onCancel, user, onSubmit }) => {
                     { required: true, message: "Addres can not be blank!" },
                   ]}
                 >
-                  <Input placeholder="Address" value={state.address} />
+                  <Input placeholder="Address" />
                 </Form.Item>
               </Col>
               <Col span={12} order={4}>
@@ -202,13 +222,10 @@ const UserForm = ({ onCancel, user, onSubmit }) => {
                     { required: true, message: "Phone can not be blank!" },
                   ]}
                 >
-                  <Input
-                    placeholder={state.phone ? state.phone : "Mobile Phone"}
-                    value={state.phone}
-                  />
+                  <Input placeholder="Mobile Phone" />
                 </Form.Item>
               </Col>
-              {!state.userData.length && RenderInputPassword()}
+              {!onUpdate && RenderFormPassword()}
               <Col span={24} order={5}>
                 <p>Status:</p>
                 <Form.Item name="status" label={false} tooltip="Status">
@@ -234,6 +251,7 @@ const UserForm = ({ onCancel, user, onSubmit }) => {
               </Col>
             </Row>
           </Col>
+
           <Col span={7} order={1}>
             <p>Feature Image</p>
             {/* <Image
@@ -241,11 +259,7 @@ const UserForm = ({ onCancel, user, onSubmit }) => {
                 src={featureImage}
                 onClick={showModal}
              /> */}
-            <img
-              width={200}
-              onClick={showMediaModal}
-              src={state.imageUrl}
-            ></img>
+            <img width={200} onClick={showMediaModal} src={image}></img>
             <Modal
               title="Select Image"
               visible={isModalVisible}

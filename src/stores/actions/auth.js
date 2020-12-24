@@ -205,6 +205,7 @@ export const requestDeleteUser = (id) => {
       .doc(id)
       .delete()
       .then(async () => {
+        // const user = firebase.auth().currentUser;
         await dispatch(setUser());
       });
   };

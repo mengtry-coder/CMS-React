@@ -19,6 +19,8 @@ const Index = () => {
   const [visible, setVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [userData, setUserData] = useState({});
+  const [isUpdate, setIsUpdate] = useState(false);
+
   const users = useSelector((state) => state.auth.users);
   const alertRef = useRef();
   const dispatch = useDispatch();
@@ -55,16 +57,15 @@ const Index = () => {
   /**
    * handle update user info
    */
-  const _onUpdate = useCallback(
-    (record) => {
-      setVisible(true);
-      setUserData(record);
-    },
-    [setUserData]
-  );
+  const _onUpdate = (record) => {
+    setVisible(true);
+    setUserData(record);
+    setIsUpdate(true);
+  };
 
   const showModal = () => {
     setVisible(true);
+    setIsUpdate(false);
   };
   const handleCancel = () => {
     setVisible(false);
@@ -94,7 +95,6 @@ const Index = () => {
         <Button type="primary" onClick={showModal}>
           + Add New
         </Button>
-
         <Modal
           visible={visible}
           title="Create User"
@@ -106,6 +106,8 @@ const Index = () => {
             onCancel={handleCancel}
             user={userData}
             onSubmit={onSubmit}
+            onShowModal={showModal}
+            onUpdate={isUpdate}
           />
         </Modal>
         <Search />
