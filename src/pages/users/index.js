@@ -20,7 +20,7 @@ const Index = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [userData, setUserData] = useState({});
   const [isUpdate, setIsUpdate] = useState(false);
-
+  const [dataSource, setDataSource] = useState([]);
   const users = useSelector((state) => state.auth.users);
   const alertRef = useRef();
   const dispatch = useDispatch();
@@ -79,17 +79,41 @@ const Index = () => {
   /**
    * handle create user to firebase firestore
    */
-  const onSubmit = async (user, image, status) => {
+  const onSubmit = async (user, image, status, id) => {
     setIsLoading(true);
     setVisible(false);
     try {
-      await dispatch(actionsAuth.requestSignUp(user, image, status));
+      if (isUpdate === false) {
+        await dispatch(actionsAuth.requestSignUp(user, image, status));
+      } else {
+        await dispatch(actionsAuth.requestUpdate(user, id, image, status));
+      }
       setIsLoading(false);
       message.success("Successful");
     } catch (e) {
       message.error(e.message);
       setIsLoading(false);
     }
+  };
+  /**
+   *
+   * @param {get paramer} value
+   * handle search user by name
+   */
+  const onChangeText = (value) => {
+    const new_arr_data = users.filter(
+      (i) =>
+        i.name.toLowerCase().includes(value.toLowerCase()) ||
+        i.phone.toLowerCase().includes(value.toLowerCase())
+    );
+    if (value === "") {
+      setDataSource([]);
+    } else {
+      setDataSource(new_arr_data);
+    }
+  };
+  const onClearTextSearch = (e) => {
+    console.log(e);
   };
   return (
     <div>
@@ -112,10 +136,10 @@ const Index = () => {
             onUpdate={isUpdate}
           />
         </Modal>
-        <Search />
+        <Search onChangeText={onChangeText} onClear={onClearTextSearch} />
         <br></br>
         <CustomTable
-          dataSource={users}
+          dataSource={!dataSource.length ? users : dataSource}
           loading={isLoading && <Loading />}
           onDelete={_onDelete}
           onUpdate={_onUpdate}

@@ -12,7 +12,7 @@ import {
   Popover,
 } from "antd";
 import LogoImg from "./../../images/Cms-logo-sample-1.svg";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   DesktopOutlined,
   PieChartOutlined,
@@ -42,16 +42,16 @@ function MainLayout(props) {
     avatar: null,
   });
   const user = useSelector((state) => state.auth.currentUser);
+  const location = useLocation().pathname.slice(1);
   const onCollapse = (value) => {
     setCallaped(value);
-    console.log(activeKey);
   };
   const dispatch = useDispatch();
   const confirm = async () => {
     await dispatch(actionsAuth.requestLogout());
   };
   useEffect(() => {
-    console.log(props);
+    console.log(location.pathname);
     if (user) {
       const { name, avatar } = user[0];
       setState({
@@ -165,7 +165,11 @@ function MainLayout(props) {
             </Row>
           </Header>
           <Content style={{ margin: "0 16px" }}>
-            <Breadcrumb style={{ margin: "16px 0" }}>User / Index</Breadcrumb>
+            <Breadcrumb
+              style={{ margin: "16px 0", textTransform: "capitalize" }}
+            >
+              {location}
+            </Breadcrumb>
             <div
               className="site-layout-background"
               style={{ padding: 24, minHeight: 360 }}

@@ -53,6 +53,7 @@ const UserForm = ({ onCancel, user, onSubmit, onShowModal, onUpdate }) => {
       const avatar = !user.avatar ? featureImage : user.avatar;
       setImage(avatar);
     } else {
+      setImage(featureImage);
       addNewValue();
     }
   }, [onShowModal]);
@@ -79,6 +80,9 @@ const UserForm = ({ onCancel, user, onSubmit, onShowModal, onUpdate }) => {
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+  /**
+   * set default user information
+   */
   useEffect(() => {
     if (user) {
       setState({
@@ -98,13 +102,9 @@ const UserForm = ({ onCancel, user, onSubmit, onShowModal, onUpdate }) => {
       });
     }
   }, [onShowModal]);
-  const submitRequestUpdate = async (users) => {
-    try {
-      await dispatch(actionUser.requestUpdate(users, user.id));
-    } catch (e) {
-      message.error(e.message);
-    }
-  };
+  /**
+   * select image
+   */
   const onSeleceImageUri = (value) => {
     setIsModalVisible(false);
     setImage(value.url);
@@ -164,7 +164,7 @@ const UserForm = ({ onCancel, user, onSubmit, onShowModal, onUpdate }) => {
         initialValues={{
           remember: true,
         }}
-        onFinish={(value) => onSubmit(value, image, status)}
+        onFinish={(value) => onSubmit(value, image, status, user.id)}
         onFinishFailed={onFinishFailed}
       >
         <Row>

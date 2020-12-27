@@ -17,6 +17,11 @@ const {
   SET_CURRENT_USER_FAILURE,
   SET_CURRENT_USER_SUCCESS,
 } = type.User;
+/**
+ * get firebase firestore timeStam
+ */
+const timestam = firebase.firestore.FieldValue.serverTimestamp();
+
 export const fetchUserSuccess = (data) => {
   return {
     type: FETCH_USER_SUCCESS,
@@ -32,7 +37,7 @@ export const fetchUserFailure = (message) => {
 export const setUser = (uid) => {
   return async (dispatch, getState) => {
     try {
-      const ref = firestore.collection("users");
+      const ref = firestore.collection("users").where("status", "==", true);
       const onSnapshot = await ref.get();
       if (!onSnapshot.empty) {
         let data = [];
@@ -146,9 +151,10 @@ export const createUserSucess = () => {
   };
 };
 
-export const createUserFailure = () => {
+export const createUserFailure = (message) => {
   return {
     type: CREATE_USER_FIALURE,
+    payload: message,
   };
 };
 
@@ -171,7 +177,6 @@ export const requestSignUp = (user, image, status) => {
  */
 export const requestCreateUser = (user, image, status) => {
   return async (dispatch) => {
-    const timestam = firebase.firestore.FieldValue.serverTimestamp();
     await firestore
       .collection("users")
       .add({
@@ -229,7 +234,7 @@ export const requestForgotPassword = (user) => {
  * request update usr info
  */
 
-export const requestUpdate = (user, id) => {
+export const requestUpdate = (user, id, imageUrl, status) => {
   return async (dispatch) => {
     firestore
       .collection("users")
@@ -239,6 +244,9 @@ export const requestUpdate = (user, id) => {
         email: user.email,
         address: user.address,
         phone: user.phone,
+        avatar: imageUrl,
+        status: status,
+        updated_date: timestam,
       })
       .then(async () => {
         await dispatch(setUser());
