@@ -48,6 +48,8 @@ const Index = () => {
       if (window.confirm(`Are you sure you want to delete ${user.name}?`)) {
         await dispatch(actionsAuth.requestDeleteUser(user.id));
         setIsLoading(false);
+      } else {
+        setIsLoading(false);
       }
     } catch (e) {
       message.error(e.message);

@@ -51,6 +51,7 @@ function MainLayout(props) {
     await dispatch(actionsAuth.requestLogout());
   };
   useEffect(() => {
+    console.log(props);
     if (user) {
       const { name, avatar } = user[0];
       setState({
