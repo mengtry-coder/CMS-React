@@ -10,15 +10,11 @@ import { Image } from "antd";
 const Page404 = (props) => {
   return (
     <MainLayout>
-        <div className="text-center">
-          <Image
-          width={500}
-          src={NotFound} />
-          <p>404 Page not found!!</p>
-          <Link to="/admin">
-              Go to Dashboard
-          </Link>
-        </div>
+      <div className="text-center">
+        <Image width={500} src={NotFound} />
+        <p>404 Page not found!!</p>
+        <Link to="/admin">Go to Dashboard</Link>
+      </div>
     </MainLayout>
   );
 };
