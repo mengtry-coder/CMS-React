@@ -159,7 +159,7 @@ const Index = (props) => {
         <Input onChange={(e) => handleSearch(e.target.value)} />
       </Search>
       {state.loading ? (
-        <div className="loading">
+        <div className="loading text-center">
           <Loading />
         </div>
       ) : (

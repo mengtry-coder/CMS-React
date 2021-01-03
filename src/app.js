@@ -8,6 +8,7 @@ import Page404 from "./pages/404/index";
 import PrivateRoute from "./pages/authProvider/privateRoute";
 import Login from "./pages/login/form";
 import User from "./pages/users/index";
+import Config from "./pages/config/index";
 import NotFound from "./pages/404/index";
 import Media from "./pages/media/index";
 import ConfirmEmail from "./pages/forgot-password/confirmEmail";
@@ -27,6 +28,7 @@ const App = () => {
           <Route path="/reset-password" component={ResetPassword} />
           <PrivateRoute path="/admin/user/index" component={User} />
           <PrivateRoute path="/admin/media/index" component={Media} />
+          <PrivateRoute path="/admin/config/index" component={Config} />
           <PrivateRoute component={Page404} />
         </Switch>
       </BrowserRouter>

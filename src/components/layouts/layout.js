@@ -145,7 +145,7 @@ function MainLayout(props) {
                 <Link to="/admin/custom-text/index">Custom Text</Link>
               </Menu.Item>
               <Menu.Item icon={<SettingOutlined />} key="11">
-                <Link to="/admin/setting/index">Config</Link>
+                <Link to="/admin/config/index">Config</Link>
               </Menu.Item>
             </SubMenu>
           </Menu>

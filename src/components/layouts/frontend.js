@@ -1,12 +1,28 @@
-import React from 'react';
+import React, {useState} from 'react';
 import "../../frontend_style.scss";
 import Logo from "./../../images/Cms-logo-sample-1.svg";
-import { Row, Col, Image, Button, Space } from "antd";
+import { Link } from "react-router-dom";
+import { Row, Col, Space, Modal } from "antd";
 import {
     MinusOutlined,
+    HomeOutlined,
+
   } from "@ant-design/icons";
 
-function frontend(props) {
+function Frontend(props) {
+    const [isModalVisible, setIsModalVisible] = useState(false);
+
+    const showModal = () => {
+        setIsModalVisible(true);
+    };
+
+    const handleOk = () => {
+        setIsModalVisible(false);
+    };
+
+    const handleCancel = () => {
+        setIsModalVisible(false);
+    };
     
     return (
         <div>
@@ -15,10 +31,25 @@ function frontend(props) {
                     <Col className="menu-logo" span={12}>
                         CMS React
                     </Col>
-                    <Col className="menu-title" span={12}>
-                    <i class="fas fa-grip-lines"></i> MENU
+                    <Col className="menu-title" onClick={showModal} span={12}>
+                        <i class="fas fa-grip-lines"></i> MENU
                     </Col>
                 </Row>
+                <Modal
+                    title="CMS React"
+                    visible={isModalVisible} 
+                    onOk={handleOk} 
+                    footer={false}
+                    onCancel={handleCancel}
+                >
+                    <ul>
+                        <li><Link to="#"><HomeOutlined /> Home</Link></li>
+                        <li><Link to="#"><HomeOutlined /> About Us</Link></li>
+                        <li><Link to="#"><HomeOutlined /> Portfolio</Link></li>
+                        <li><Link to="#"><HomeOutlined /> Contact Us</Link></li>
+                        <li><Link to="#"><HomeOutlined /> Deal</Link></li>
+                    </ul>
+                </Modal>
             </div>
               {props.children}
             <div className="footer container mt-5 mb-5">
@@ -64,4 +95,4 @@ function frontend(props) {
     )
 }
 
-export default frontend
+export default Frontend
