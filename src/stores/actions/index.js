@@ -17,3 +17,8 @@ export {
   requestRemoveMedia,
   requestDeleteImagefromFirebaseStorage,
 } from "./media";
+export {
+  setConfig,
+  setConfigRequest,
+  requestDeleteConfig,
+} from "./config";

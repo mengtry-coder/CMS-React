@@ -3,7 +3,7 @@
 import React from "react";
 import { Table, Divider } from "antd";
 import { EditFilled, DeleteOutlined } from "@ant-design/icons";
-import { columns } from "../../../data/index";
+import { columns, config } from "../../../data/index";
 
 import PropTypes from "prop-types";
 const propTypes = {

@@ -1,6 +1,7 @@
 /** @format */
 
 import React, { useState, useEffect } from "react";
+import AppBreadcrumbs from "./../AppBreadCrumbs";
 import {
   Layout,
   Menu,
@@ -42,7 +43,8 @@ function MainLayout(props) {
     avatar: null,
   });
   const user = useSelector((state) => state.auth.currentUser);
-  const location = useLocation().pathname.slice(1);
+  const location = useLocation().pathname.slice(7);
+  console.log(location);
   const onCollapse = (value) => {
     setCallaped(value);
   };
@@ -165,11 +167,8 @@ function MainLayout(props) {
             </Row>
           </Header>
           <Content style={{ margin: "0 16px" }}>
-            <Breadcrumb
-              style={{ margin: "16px 0", textTransform: "capitalize" }}
-            >
-              {location}
-            </Breadcrumb>
+            <br></br>
+            <AppBreadcrumbs/>
             <div
               className="site-layout-background"
               style={{ padding: 24, minHeight: 360 }}
