@@ -1,13 +1,55 @@
 import React, {useState, useEffect, useCallback, useRef} from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Modal, message } from "antd";
+import { Button, Modal, message, Table } from "antd";
 import MainLayout from "../../components/layouts/layout";
 import Search from "./search"
 import CreateForm from "./form"
 import CustomTable from "../../components/UI/Tables/index";
 import * as actionsAuth from "../../stores/actions/index";
 import Loading from "../../components/UI/spiner/index";
+const columns = [
+  {
+    title: "Name",
+    dataIndex: "name",
+    key: "name",
+  },
+  {
+    title: "Key",
+    dataIndex: "key",
+    key: "key",
+  },
+  {
+    title: "Action",
+    dataIndex: "action",
+    key: "action",
+  },
+];
+const arr_data = [
+  {
+    name:"measmengtry191",
+    key:"234qwsqasd35",
+    action:"delete|update"
+  },
+  {
+    name:"measmeasdfngtry191",
+    key:"234qwsq35",
+    action:"delete|update"
 
+  },
+  {
+    name:"measmensdfgtry191",
+    key:"234qwssq35",
+    action:"delete|update"
+
+  },
+
+  {
+    name:"measmengtry191",
+    key:"234sfqwsq35",
+    action:"delete|update"
+
+  },
+];
 
 const Index = () => {
     const [visible, setVisible] = useState(false);
@@ -16,7 +58,7 @@ const Index = () => {
     const [dataSource, setDataSource] = useState([]);
     const [userData, setUserData] = useState({});
     const config = useSelector((state) => state.auth.config);
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
     const fetchConfigFromFirestore = useCallback(async () => {
         try {
           await dispatch(actionsAuth.setConfig());
@@ -79,13 +121,7 @@ const Index = () => {
                 </Modal>
                 <Search />
                 <br></br>
-                <CustomTable
-                    dataSource={!dataSource.length ? config : dataSource}
-                    loading={isLoading && <Loading />}
-                    onDelete={_onDelete}
-                    onUpdate={_onUpdate}
-                    pagination={{ pageSize: 50 }}
-                    />
+                <Table dataSource={arr_data} columns={columns} />;
 
             </MainLayout>
         </div>

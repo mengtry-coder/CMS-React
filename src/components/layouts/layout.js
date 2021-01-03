@@ -52,17 +52,17 @@ function MainLayout(props) {
   const confirm = async () => {
     await dispatch(actionsAuth.requestLogout());
   };
-  useEffect(() => {
-    console.log(location.pathname);
-    if (user) {
-      const { name, avatar } = user[0];
-      setState({
-        ...state,
-        name: name,
-        avatar: avatar,
-      });
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   console.log(location.pathname);
+  //   if (user) {
+  //     const { name, avatar } = user[0];
+  //     setState({
+  //       ...state,
+  //       name: name,
+  //       avatar: avatar,
+  //     });
+  //   }
+  // }, [user]);
   const text = "Are you sure to logout?";
   const content = (
     <div>
