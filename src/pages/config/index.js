@@ -1,12 +1,14 @@
 import React, {useState, useEffect, useCallback, useRef} from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Modal, message, Table } from "antd";
+import firebase, { auth, firestore } from "../../utils/firebase";
 import MainLayout from "../../components/layouts/layout";
 import Search from "./search"
 import CreateForm from "./form"
 import CustomTable from "../../components/UI/Tables/index";
 import * as actionsAuth from "../../stores/actions/index";
 import Loading from "../../components/UI/spiner/index";
+import Config from "../../model/config";
 const columns = [
   {
     title: "Name",
