@@ -19,6 +19,7 @@ export {
 } from "./media";
 export {
   setConfig,
-  setConfigRequest,
+  requestUpdateConfig,
   requestDeleteConfig,
+  requestCreateConfig,
 } from "./config";

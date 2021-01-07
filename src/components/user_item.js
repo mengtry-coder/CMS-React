@@ -1,7 +1,7 @@
 /** @format */
 
 import React from "react";
-import classes from "./../MainStyle.css";
+import classes from "./../MainStyle.scss";
 const index = (props) => {
   return (
     <div>

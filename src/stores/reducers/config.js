@@ -1,20 +1,20 @@
 /** @format */
 import { type } from "../../constants/index";
 const {
-  REQUEST_FETCH_CONFIG_STORAGE_FIALURE,
-  REQUEST_FETCH_CONFIG_STORAGE_SUCCESS,
+  FETCH_CONFIG_SUCCESS,
+  FETCH_CONFIG_FAILURE,
 } = type.Config;
 const initailState = {
-  configs: [],
+  config: [],
 };
 
 const configReducer = (state = initailState, action) => {
   switch (action.type) {
-    case REQUEST_FETCH_CONFIG_STORAGE_SUCCESS:
+    case FETCH_CONFIG_SUCCESS:
       const { payload } = action;
       return {
         ...state,
-        configs: payload,
+        config: payload,
       };
     default:
       return state;

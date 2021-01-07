@@ -3,11 +3,11 @@
 import PropTypes from "prop-types";
 class Config {
   static propTypes = {
-    id: PropTypes.string.isRequired,
+    key: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
   };
-  constructor(id, name) {
-    this.id = id;
+  constructor(key, name) {
+    this.key = key;
     this.name = name;
   }
 }

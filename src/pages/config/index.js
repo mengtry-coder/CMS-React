@@ -5,10 +5,11 @@ import firebase, { auth, firestore } from "../../utils/firebase";
 import MainLayout from "../../components/layouts/layout";
 import Search from "./search"
 import CreateForm from "./form"
-import CustomTable from "../../components/UI/Tables/index";
+import CustomTable from "../../components/UI/Tables/config";
 import * as actionsAuth from "../../stores/actions/index";
 import Loading from "../../components/UI/spiner/index";
 import Config from "../../model/config";
+import {type} from "./../../constants/index"
 const columns = [
   {
     title: "Name",
@@ -26,40 +27,14 @@ const columns = [
     key: "action",
   },
 ];
-const arr_data = [
-  {
-    name:"measmengtry191",
-    key:"234qwsqasd35",
-    action:"delete|update"
-  },
-  {
-    name:"measmeasdfngtry191",
-    key:"234qwsq35",
-    action:"delete|update"
-
-  },
-  {
-    name:"measmensdfgtry191",
-    key:"234qwssq35",
-    action:"delete|update"
-
-  },
-
-  {
-    name:"measmengtry191",
-    key:"234sfqwsq35",
-    action:"delete|update"
-
-  },
-];
 
 const Index = () => {
     const [visible, setVisible] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [isUpdate, setIsUpdate] = useState(false);
     const [dataSource, setDataSource] = useState([]);
-    const [userData, setUserData] = useState({});
-    const config = useSelector((state) => state.auth.config);
+    const [userData, setConfigData] = useState({});
+    const config = useSelector((state) => state.config.config);
     const dispatch = useDispatch()
     const fetchConfigFromFirestore = useCallback(async () => {
         try {
@@ -80,7 +55,7 @@ const Index = () => {
     };
     const _onUpdate = (record) => {
         setVisible(true);
-        setUserData(record);
+        setConfigData(record);
         setIsUpdate(true);
       };
     const _onDelete = async (config) => {
@@ -123,7 +98,15 @@ const Index = () => {
                 </Modal>
                 <Search />
                 <br></br>
-                <Table dataSource={arr_data} columns={columns} />;
+                <CustomTable
+                  dataSource={!dataSource.length ? config : dataSource}
+                  loading={isLoading && <Loading />}
+                  onDelete={_onDelete}
+                  onUpdate={_onUpdate}
+                  // scroll={(e) => onSroll(e)}
+                  // id={id}
+                  pagination={{ pageSize: 50 }}
+                />
 
             </MainLayout>
         </div>

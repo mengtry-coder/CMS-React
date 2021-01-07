@@ -11,27 +11,33 @@ import {
   Col,
   Row,
   Popover,
+  Card,
+  Avatar,
+  Space
 } from "antd";
-import LogoImg from "./../../images/Cms-logo-sample-1.svg";
+import LogoImg from "./../../images/Cms-logo-sample-2.svg";
 import { Link, useLocation } from "react-router-dom";
 import {
   DesktopOutlined,
   PieChartOutlined,
   FileAddOutlined,
-  UserOutlined,
+  HomeOutlined,
   FileImageOutlined,
   LogoutOutlined,
   FormOutlined,
   BankOutlined,
+  EditOutlined,
+  EllipsisOutlined,
   FundViewOutlined,
   UsergroupAddOutlined,
   SettingOutlined,
+  PhoneOutlined,
+  BellOutlined,
   DiffOutlined,
 } from "@ant-design/icons";
-import "../../MainStyle.css";
+import "../../MainStyle.scss";
 import * as actionsAuth from "../../stores/actions/auth";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { avatar as userAvatar } from "../../constants/image";
 function MainLayout(props) {
   const { Header, Content, Footer, Sider } = Layout;
@@ -64,35 +70,40 @@ function MainLayout(props) {
   //   }
   // }, [user]);
   const text = "Are you sure to logout?";
+  const { Meta } = Card;
   const content = (
-    <div>
-      <div className="pop_menu">
-        <UserOutlined /> {state.name}
-      </div>
-      <div className="pop_menu">
-        <Link to="/">
-          <BankOutlined /> Site
-        </Link>
-      </div>
-      <div className="pop_menu">
-        <Link to="/admin//user/index">
-          <SettingOutlined /> Setting
-        </Link>
-      </div>
-      <div className="pop_menu">
-        <Link>
-          <Popconfirm
-            clasasName="btn_logout"
-            placement="top"
-            title={text}
-            onConfirm={confirm}
-            okText="Yes"
-            cancelText="No"
-          >
-            <LogoutOutlined /> Logout
-          </Popconfirm>
-        </Link>
-      </div>
+    <div className="text-center">
+      <Card
+        style={{ width: 300 }}
+        cover={
+        <img
+            alt="imgCover"
+            src="https://cdn.psdrepo.com/images/2x/free-macbook-pro-mockup-psd-y2.jpg"
+        />
+        }
+        actions={[
+          <Link to="/admin/config/index"><SettingOutlined /></Link>,
+          <Link to="/"><HomeOutlined /></Link>,
+          <Link>
+            <Popconfirm
+              clasasName="btn_logout"
+              placement="top"
+              title={text}
+              onConfirm={confirm}
+              okText="Yes"
+              cancelText="No"
+            >
+              <LogoutOutlined />
+            </Popconfirm>
+          </Link>
+        ]}
+    >
+        <Meta
+            avatar={<Avatar src="https://cdn.britannica.com/92/215392-050-96A4BC1D/Australian-actor-Chris-Hemsworth-2019.jpg" />}
+            title="Mengtry"
+            description="Chom Ka Morn, Sothearous, Phnom Penh"
+        />
+    </Card>
     </div>
   );
   return (
@@ -100,9 +111,8 @@ function MainLayout(props) {
       <Layout style={{ minHeight: "100vh" }}>
         <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
           <Link to="/">
-            <div mode="inline" className="logo" className="logo">
-              <img width={40} src={LogoImg} />
-              <h1>WTCycle</h1>
+            <div mode="inline" className="logo text-center">
+              <img className="m-2" width={100} src={LogoImg} />
             </div>
           </Link>
 
@@ -154,14 +164,24 @@ function MainLayout(props) {
         </Sider>
         <Layout className="site-layout">
           <Header className="site-layout-background" style={{ padding: 0 }}>
-            <Row>
-              <Col span={22} />
-              <Col span={2}>
-                <Popover content={content} title="Profile">
-                  <Image
-                    width={40}
-                    src={!state.avatar ? userAvatar : state.avatar}
-                  />
+            <Row gutter={19}>
+              <Col span={20} />
+              {/* <Col span={2}>
+                <div className="fs-4 text text-right">
+                  <BellOutlined />
+                </div>
+              </Col> */}
+              <Col span={4}>
+                <Popover content={content} title="User Profile">
+                  <Space>
+                    <Avatar
+                      className="mb-3"
+                      width={400}
+                      // src={!state.avatar ? userAvatar : state.avatar}
+                      src="https://cdn.britannica.com/92/215392-050-96A4BC1D/Australian-actor-Chris-Hemsworth-2019.jpg"
+                    />
+                    <p>Mengtry</p>
+                  </Space>
                 </Popover>
               </Col>
             </Row>
@@ -175,6 +195,7 @@ function MainLayout(props) {
             >
               {/* Main */}
               {props.children}
+
               {/* <User isLoading={isLoading}/> */}
               {/* */}
             </div>

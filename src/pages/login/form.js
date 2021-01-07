@@ -2,7 +2,7 @@
 
 import React, { Fragment, useState, useContext } from "react";
 import { Redirect } from "react-router";
-import LogoImg from "./../../images/Cms-logo-sample-1.svg";
+import LogoImg from "./../../images/Cms-logo-login-2.svg";
 import "./styles.css";
 import { Button, Form, Input, Checkbox, Image } from "antd";
 import { Link } from "react-router-dom";
@@ -67,9 +67,8 @@ const LoginForm = ({ history }) => {
             remember: true,
           }}
           onFinish={onFinish}>
-          <div mode='inline' className='logo-login'>
-            <Image width={100} src={LogoImg} />
-            <h1>WTCycle</h1>
+          <div mode='inline' className='text-center'>
+            <Image width={200} src={LogoImg} />
           </div>
           {/* <h1 className='title-center'>Login Form</h1> */}
 

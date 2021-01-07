@@ -69,6 +69,8 @@ export const setUser = (uid) => {
     }
   };
 };
+
+
 export const fetchCurrentUserSuccess = (data) => {
   return {
     type: SET_CURRENT_USER_SUCCESS,

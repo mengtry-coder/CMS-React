@@ -21,15 +21,3 @@ export const columns = [
     key: "address",
   },
 ];
-export const config = [
-  {
-    title: "Name",
-    dataIndex: "name",
-    key: "name",
-  },
-  {
-    title: "Key",
-    dataIndex: "key",
-    key: "key",
-  },
-];

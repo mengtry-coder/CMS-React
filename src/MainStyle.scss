@@ -1,4 +1,10 @@
 @import "antd/dist/antd.css";
+//Variable
+$bgColor: black;
+$fontFamily: Roboto;
+$fontFamilyTitle: lato;
+$baseColor: #5492df;
+
 .text-right {
   text-align: right;
 }
@@ -10,10 +16,6 @@
 }
 .margin-right {
   margin-right: 5px;
-}
-.logo {
-  color: white;
-  display: flex;
 }
 .logo-login {
   color: white;
@@ -34,6 +36,20 @@
   height: auto;
   object-fit: cover;
   margin: 10px 20px;
+}
+.profilePicture img.ant-image-img {
+  border-radius: 32px;
+  object-fit: cover;
+  width: 50px;
+  height: 50px;
+  border: 2px solid $baseColor;
+}
+.profile img.ant-image-img {
+  border-radius: 5px;
+  border: 2px solid $baseColor;
+}
+.font-profile {
+  font-size: 30px;
 }
 
 .site-layout .site-layout-background {

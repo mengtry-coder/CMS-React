@@ -19,28 +19,54 @@ const {
 /**
  * request fetching config success
  */
-const requestFetchConfigSuccess = (config) => {
-  return {
-    type: REQUEST_FETCH_CONFIG_STORAGE_SUCCESS,
-    payload: config,
-  };
-};
-/**
- *set config request from firestore
- */
+// ==================Config Action=============
 export const fetchConfigSuccess = (data) => {
+  console.log(data);
   return {
     type: FETCH_CONFIG_SUCCESS,
     payload: data,
   };
 };
 export const fetchConfigFailure = (message) => {
+  console.log("data not fetch!");
   return {
     type: FETCH_CONFIG_FAILURE,
     payload: message,
   };
 };
-export const setConfig = (uid) => {
+export const requestUpdateConfig = (key, name) => {
+  return async (dispatch) => {
+    firestore
+      .collection("config")
+      .doc(key)
+      .update({
+        name: name
+      })
+      .then(async () => {
+        await dispatch(setConfig());
+      })
+      .catch((e) => {
+        throw e;
+      });
+  };
+};
+
+export const requestCreateConfig = (name) => {
+  return async (dispatch) => {
+    await firestore
+      .collection("config")
+      .add({
+        name:name
+      })
+      .then(async () => {
+        await dispatch(setConfig());
+      })
+      .catch((e) => {
+        throw e;
+      });
+  };
+};
+export const setConfig = (key) => {
   return async (dispatch, getState) => {
     try {
       const ref = firestore.collection("config");
@@ -48,54 +74,19 @@ export const setConfig = (uid) => {
       if (!onSnapshot.empty) {
         let data = [];
         for (let i = 0; i < onSnapshot.docs.length; i++) {
-          const datax = onSnapshot.docs[i].data();
-          const id = onSnapshot.docs[i].id;
+          const configData = onSnapshot.docs[i].data();
+          const key = onSnapshot.docs[i].id;
           data.push(
             new Config(
-              id,
-              datax.name,
-              datax.uid
+              key,
+              configData.name
             )
           );
-        }
-        if (uid) {
-          const currentConfig = data.filter((config) => config.uid === uid);
-          dispatch(fetchCurrentConfigSuccess(currentConfig));
         }
         dispatch(fetchConfigSuccess(data));
       }
     } catch (e) {
       dispatch(fetchConfigFailure(e.message));
-      throw e;
-    }
-  };
-};
-export const fetchCurrentConfigSuccess = (data) => {
-  return {
-    type: SET_CURRENT_CONFIG_SUCCESS,
-    payload: data,
-  };
-};
-export const setConfigRequest = () => {
-  return async (dispatch) => {
-    try {
-      const ref = firestore.collection("config");
-      const onSnapshot = await ref.get();
-      if (!onSnapshot.empty) {
-        let arr_data = [];
-        for (let i = 0; i < onSnapshot.docs.length; i++) {
-          const id = onSnapshot.docs[i].id;
-          const data = onSnapshot.docs[i].data();
-          arr_data.push(
-            new Config(
-              id,
-              data.name,
-            )
-          );
-        }
-        dispatch(requestFetchConfigSuccess(arr_data));
-      }
-    } catch (e) {
       throw e;
     }
   };
@@ -112,7 +103,7 @@ export const requestDeleteConfig = (id) => {
       .doc(id)
       .delete()
       .then(() => {
-        dispatch(setConfigRequest());
+        dispatch(setConfig());
       });
   };
 };
