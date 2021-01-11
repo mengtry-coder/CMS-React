@@ -1,0 +1,10 @@
+/** @format */
+
+@import "antd/dist/antd.css";
+
+.ant-modal {
+  width: 700px !important;
+}
+.actions-button {
+  padding-left: 10px;
+}

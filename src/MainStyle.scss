@@ -87,3 +87,10 @@ $baseColor: #5492df;
 .ant-popover-title {
   text-align: center;
 }
+
+//Dashboard
+
+.card {
+  border: none;
+  border-left: 3px solid $baseColor;
+}

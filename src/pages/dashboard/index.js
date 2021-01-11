@@ -2,7 +2,7 @@
 
 import React from "react";
 import MainLayout from "./../../components/layouts/layout";
-import "../../ui_styling.css";
+// import "../../ui_styling.css";
 import ConfigIndex from "./../../pages/config/index"
 import {
   Row,
