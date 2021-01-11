@@ -73,4 +73,5 @@ const ConfigForm = ({ onCancel, config, onSubmit, onShowModal, onUpdate }) => {
     )
 }
 
+ConfigForm.propTypes = propTypes;
 export default ConfigForm

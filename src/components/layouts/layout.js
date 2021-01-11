@@ -137,11 +137,17 @@ function MainLayout(props) {
               <Link to="/admin/media/index">Media</Link>
             </Menu.Item>
             <SubMenu key="sub1" icon={<DesktopOutlined />} title="MISC">
+              <Menu.Item key="112" icon={<UsergroupAddOutlined />}>
+                <Link to="/admin/product/index">Product</Link>
+              </Menu.Item>
               <Menu.Item key="2" icon={<UsergroupAddOutlined />}>
                 <Link to="/admin/user/index">User</Link>
               </Menu.Item>
             </SubMenu>
             <SubMenu key="sub2" icon={<DiffOutlined />} title="Setup">
+              <Menu.Item key="111" icon={<FileImageOutlined />}>
+                <Link to="/admin/product-type/index">Product Type</Link>
+              </Menu.Item>
               <Menu.Item key="6" icon={<FundViewOutlined />}>
                 <Link to="/admin/country/index">Country</Link>
               </Menu.Item>

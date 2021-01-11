@@ -10568,7 +10568,7 @@ a:focus {
 .dropdown.no-arrow .dropdown-toggle::after {
   display: none;
 }
-
+/* 
 .sidebar .nav-item.dropdown .dropdown-toggle::after,
 .topbar .nav-item.dropdown .dropdown-toggle::after {
   width: 1rem;
@@ -10579,9 +10579,9 @@ a:focus {
   font-weight: 900;
   content: "\f105";
   font-family: "Font Awesome 5 Free";
-}
+} */
 
-.sidebar .nav-item.dropdown.show .dropdown-toggle::after,
+/* .sidebar .nav-item.dropdown.show .dropdown-toggle::after,
 .topbar .nav-item.dropdown.show .dropdown-toggle::after {
   content: "\f107";
 }
@@ -10604,7 +10604,7 @@ a:focus {
 .topbar .nav-item .nav-link .img-profile {
   height: 2rem;
   width: 2rem;
-}
+} */
 
 .topbar {
   height: 4.375rem;
