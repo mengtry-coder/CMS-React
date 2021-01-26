@@ -26,13 +26,11 @@ const Search = ({ onChangeText, onClear }) => {
   const { Option } = Select;
   return (
     <>
-      <br></br>
-      <br></br>
       <Form form={form}>
         <Row gutter={16}>
-          <Col span={8}>
-            <Form.Item label="Name">
-              <Input onChange={(e) => onChangeText(e.target.value)} />
+          <Col span={12}>
+            <Form.Item label={false}>
+              <Input placeholder="Search" onChange={(e) => onChangeText(e.target.value)} />
             </Form.Item>
           </Col>
         </Row>

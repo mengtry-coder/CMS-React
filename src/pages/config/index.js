@@ -1,15 +1,16 @@
 import React, {useState, useEffect, useCallback, useRef} from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Modal, message, Table } from "antd";
+import { Button, Modal, message, Table, Col, Row } from "antd";
 import firebase, { auth, firestore } from "../../utils/firebase";
 import MainLayout from "../../components/layouts/layout";
 import Search from "./search"
 import CreateForm from "./form"
 import CustomTable from "../../components/UI/Tables/config";
-import * as actionsAuth from "../../stores/actions/index";
+import * as actionCreateConfig from "../../stores/actions/index";
 import Loading from "../../components/UI/spiner/index";
 import Config from "../../model/config";
-import {type} from "./../../constants/index"
+import {type} from "./../../constants/index";
+
 const columns = [
   {
     title: "Name",
@@ -33,12 +34,12 @@ const Index = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [isUpdate, setIsUpdate] = useState(false);
     const [dataSource, setDataSource] = useState([]);
-    const [userData, setConfigData] = useState({});
+    const [configData, setConfigData] = useState({});
     const config = useSelector((state) => state.config.config);
     const dispatch = useDispatch()
     const fetchConfigFromFirestore = useCallback(async () => {
         try {
-          await dispatch(actionsAuth.setConfig());
+          await dispatch(actionCreateConfig.setConfig());
         } catch (e) {
           console.log(e);
         }
@@ -53,6 +54,22 @@ const Index = () => {
         setVisible(true);
         setIsUpdate(false);
     };
+    const onSubmit = async (config, key) => {
+      setIsLoading(true);
+      setVisible(false);
+      try {
+        if (isUpdate === false) {
+          await dispatch(actionCreateConfig.requestCreateConfig(config));
+        } else {
+          await dispatch(actionCreateConfig.requestUpdateConfig(config, key));
+        }
+        setIsLoading(false);
+        message.success("Successful");
+    } catch (e) {
+        message.error(e.message);
+        setIsLoading(false);
+      }
+    };
     const _onUpdate = (record) => {
         setVisible(true);
         setConfigData(record);
@@ -62,7 +79,7 @@ const Index = () => {
         setIsLoading(true);
         try {
             if (window.confirm(`Are you sure you want to delete ${config.name}?`)) {
-            await dispatch(actionsAuth.requestDeleteConfig(config.id));
+            await dispatch(actionCreateConfig.requestDeleteConfig(config.key));
             setIsLoading(false);
             } else {
             setIsLoading(false);
@@ -73,7 +90,7 @@ const Index = () => {
         }
     };
     const handleCancel = () => {
-    setVisible(false);
+      setVisible(false);
     };
     
     const handleOk = () => {
@@ -82,22 +99,33 @@ const Index = () => {
     return (
         <div>
             <MainLayout>
-                <Button type="primary" onClick={showModal}>
-                    + Add New
-                </Button>
-                <Modal
-                    visible={visible}
-                    title="Configuration"
-                    footer={false}
-                    onOk={handleOk}
-                    onCancel={handleCancel}
-                >
-                    <CreateForm>
-
-                    </CreateForm>
-                </Modal>
-                <Search />
-                <br></br>
+              <Row>
+                  <Col span={12} order={1}>
+                      <Search />
+                  </Col>
+                  <Col span={12} order={1}>
+                    <div className="text-right">
+                      <Button type="primary" onClick={showModal}>
+                          + Add New
+                      </Button>
+                      <Modal
+                          visible={visible}
+                          title="Configuration"
+                          footer={false}
+                          onOk={handleOk}
+                          onCancel={handleCancel}
+                          width={200}
+                      >
+                          <CreateForm
+                            onSubmit={onSubmit}
+                            config={configData}
+                            onUpdate={isUpdate}
+                            onCancel={handleCancel}
+                          />
+                      </Modal>
+                      </div>
+                  </Col>
+                </Row>
                 <CustomTable
                   dataSource={!dataSource.length ? config : dataSource}
                   loading={isLoading && <Loading />}

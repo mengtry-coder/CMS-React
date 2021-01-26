@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
-import CreateProductForm from "./form";
+import CreateForm from "./form";
 import MainLayout from "../../components/layouts/layout";
-import { Button, Modal, Table } from "antd";
+import { Button, Modal, Table, Row, Col } from "antd";
 import "./styles.css";
 import Search from "./search";
 
@@ -36,27 +36,32 @@ const Index = () => {
   return (
         <div>
             <MainLayout>
-                <Button type="primary" onClick={showModal}>
-                    + Add New
-                </Button>
-                <Modal
-                    visible={visible}
-                    title="Create Product Type"
-                    footer={false}
-                    onOk={handleOk}
-                    onCancel={handleCancel}
-                >
-                <CreateProductForm
-                    onCancel={handleCancel}
-                    onShowModal={showModal}
-                />
-                </Modal>
-                <Search />
-                <br></br>
-
-<Table dataSource={dataSource} columns={columns} />;
-      </MainLayout>
-
+              <Row>
+                <Col span={12} order={1}>
+                    <Search />
+                </Col>
+                <Col span={12} order={1}>
+                    <div className="text-right">
+                        <Button type="primary" onClick={showModal}>
+                            + Add New
+                        </Button>
+                        <Modal
+                            visible={visible}
+                            title="Create Product Type"
+                            footer={false}
+                            onOk={handleOk}
+                            onCancel={handleCancel}
+                        >
+                        <CreateForm
+                            onCancel={handleCancel}
+                            onShowModal={showModal}
+                        />
+                        </Modal>
+                    </div>
+                </Col>
+              </Row>
+              <Table dataSource={dataSource} columns={columns} />;
+            </MainLayout>
         </div>
         
     )

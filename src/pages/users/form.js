@@ -2,10 +2,10 @@ import React, { useState, useEffect, useCallback, Fragment } from "react";
 import { Modal, Button, Form, Input, Switch, Row, Col, message } from "antd";
 import featureImage from "../../images/upload_image.svg";
 import MediaLibrary from "./mediaLibrary";
+import './styles.css';
 import PropType from "prop-types";
 import * as actionUser from "../../stores/actions/index";
 import { useDispatch } from "react-redux";
-import { layout, tailLayout } from "../../constants/index";
 const propTypes = {
   onSubmit: PropType.func,
   onCancel: PropType.func,
@@ -15,6 +15,20 @@ const propTypes = {
 };
 
 const UserForm = ({ onCancel, user, onSubmit, onShowModal, onUpdate }) => {
+  const layout = {
+    labelCol: {
+      span: 16,
+    },
+    wrapperCol: {
+      span: 24,
+    },
+  };
+  const tailLayout = {
+    wrapperCol: {
+      offset: 16,
+      span: 8,
+    },
+  };
   const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState(true);
@@ -169,7 +183,7 @@ const UserForm = ({ onCancel, user, onSubmit, onShowModal, onUpdate }) => {
       >
         <Row>
           <Col span={17} order={2}>
-            <Row>
+            <Row gutter={20}>
               <Col span={12} order={1}>
                 <p>Name:</p>
                 <Form.Item

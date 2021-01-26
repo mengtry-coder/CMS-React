@@ -9,6 +9,7 @@ import PrivateRoute from "./pages/authProvider/privateRoute";
 import Login from "./pages/login/form";
 import User from "./pages/users/index";
 import ProductType from "./pages/product-type/index";
+import Product from "./pages/product/index";
 import Config from "./pages/config/index";
 import NotFound from "./pages/404/index";
 import Media from "./pages/media/index";
@@ -31,6 +32,7 @@ const App = () => {
           <PrivateRoute path="/admin/media/index" component={Media} />
           <PrivateRoute path="/admin/config/index" component={Config} />
           <PrivateRoute path="/admin/product-type/index" component={ProductType} />
+          <PrivateRoute path="/admin/product/index" component={Product} />
           <PrivateRoute component={Page404} />
         </Switch>
       </BrowserRouter>

@@ -26,16 +26,14 @@ const Search = ({ onChangeText, onClear }) => {
   const { Option } = Select;
   return (
     <>
-      <br></br>
-      <br></br>
       <Form form={form}>
         <Row gutter={16}>
-          <Col span={8}>
+          <Col span={12}>
             <Form.Item label="Name">
-              <Input onChange={(e) => onChangeText(e.target.value)} />
+              <Input placeholder="Search" onChange={(e) => onChangeText(e.target.value)} />
             </Form.Item>
           </Col>
-          <Col span={4}>
+          <Col span={8}>
             <Form.Item label="Status">
               <Select defaultValue="Active">
                 {status.map((d) => {
@@ -47,25 +45,6 @@ const Search = ({ onChangeText, onClear }) => {
                 })}
               </Select>
             </Form.Item>
-          </Col>
-          <Col gutter={2}>
-            <Button
-              type="primary"
-              htmlType="submit"
-              className="login-form-button"
-            >
-              Search
-            </Button>
-          </Col>
-          <Col gutter={2}>
-            <Button
-              type="secondary"
-              htmlType="reset"
-              className="login-form-button"
-              onClick={(e) => form.resetFields("")}
-            >
-              Reset
-            </Button>
           </Col>
         </Row>
       </Form>

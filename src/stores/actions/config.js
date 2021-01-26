@@ -34,13 +34,13 @@ export const fetchConfigFailure = (message) => {
     payload: message,
   };
 };
-export const requestUpdateConfig = (key, name) => {
+export const requestUpdateConfig = (value, key) => {
   return async (dispatch) => {
     firestore
       .collection("config")
       .doc(key)
       .update({
-        name: name
+        name: value.name
       })
       .then(async () => {
         await dispatch(setConfig());
@@ -51,12 +51,12 @@ export const requestUpdateConfig = (key, name) => {
   };
 };
 
-export const requestCreateConfig = (name) => {
+export const requestCreateConfig = (value) => {
   return async (dispatch) => {
     await firestore
       .collection("config")
       .add({
-        name:name
+        name:value.name
       })
       .then(async () => {
         await dispatch(setConfig());

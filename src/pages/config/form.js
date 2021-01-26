@@ -1,12 +1,18 @@
 import React, {useState} from 'react'
 import { Modal, Button, Form, Input, Switch, Row, Col, message } from "antd";
-import { layout, tailLayout } from "../../constants/index";
 import PropType from "prop-types";
+const layout = {
+  labelCol: { span: 8 },
+  wrapperCol: { span: 24 },
+};
+const tailLayout = {
+  wrapperCol: { offset: 8, span: 16 },
+};
 
 const propTypes = {
     onSubmit: PropType.func,
     onCancel: PropType.func,
-    user: PropType.oneOfType([PropType.object, PropType.array]),
+    config: PropType.oneOfType([PropType.object, PropType.array]),
     onShowModal: PropType.func,
     onUpdate: PropType.bool,
   };
@@ -15,15 +21,22 @@ const ConfigForm = ({ onCancel, config, onSubmit, onShowModal, onUpdate }) => {
     const [form] = Form.useForm();
     const updateValue = () => {
         form.setFieldsValue({
-        email: config.name,
+        name: config.name,
         });
     };
     const onFinishFailed = (errorInfo) => {
         console.log("Failed:", errorInfo);
     };
     const [state, setState] = useState({
-        name: "",
+        name: config.name,
     });
+    React.useEffect(() => {
+      updateValue()
+      // setState({
+      //   ...state,
+      //   name: config.name
+      // })
+    }, [config])
     return (
         <>
       <Form
@@ -33,7 +46,7 @@ const ConfigForm = ({ onCancel, config, onSubmit, onShowModal, onUpdate }) => {
         initialValues={{
           remember: true,
         }}
-        onFinish={(value) => onSubmit(value)}
+        onFinish={(value) => onSubmit(value, config.key)}
         onFinishFailed={onFinishFailed}
       >
             <Row>

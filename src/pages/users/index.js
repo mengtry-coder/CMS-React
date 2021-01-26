@@ -6,7 +6,7 @@ import "./styles.css";
 import { useDispatch, useSelector } from "react-redux";
 import CreateUserForm from "./form";
 import Search from "./search";
-import { Button, Modal, message } from "antd";
+import { Button, Modal, message, Row, Col } from "antd";
 import Loading from "../../components/UI/spiner/index";
 import PropTypes from "prop-types";
 import MainLayout from "../../components/layouts/layout";
@@ -118,26 +118,33 @@ const Index = () => {
   return (
     <div>
       <MainLayout>
-        <Button type="primary" onClick={showModal}>
-          + Add New
-        </Button>
-        <Modal
-          visible={visible}
-          title="Create User"
-          footer={false}
-          onOk={handleOk}
-          onCancel={handleCancel}
-        >
-          <CreateUserForm
-            onCancel={handleCancel}
-            user={userData}
-            onSubmit={onSubmit}
-            onShowModal={showModal}
-            onUpdate={isUpdate}
-          />
-        </Modal>
-        <Search onChangeText={onChangeText} onClear={onClearTextSearch} />
-        <br></br>
+        <Row>
+          <Col span={12} order={1}>
+            <Search onChangeText={onChangeText} onClear={onClearTextSearch} />
+          </Col>
+          <Col span={12} order={1}>
+              <div className="text-right">
+                <Button type="primary" onClick={showModal}>
+                  + Add New
+                </Button>
+                <Modal
+                  visible={visible}
+                  title="Create User"
+                  footer={false}
+                  onOk={handleOk}
+                  onCancel={handleCancel}
+                >
+                  <CreateUserForm
+                    onCancel={handleCancel}
+                    user={userData}
+                    onSubmit={onSubmit}
+                    onShowModal={showModal}
+                    onUpdate={isUpdate}
+                  />
+                </Modal>
+              </div>
+          </Col>
+      </Row>
         <CustomTable
           dataSource={!dataSource.length ? users : dataSource}
           loading={isLoading && <Loading />}

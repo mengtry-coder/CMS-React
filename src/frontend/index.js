@@ -60,14 +60,10 @@ function index() {
                     </Row>
                 </div>
                 <div className="cover-text">
-                    <p>________ Brands</p>
-                    <p className="brand_title">Web Technology Cycle</p>
+                    <p className="brand_title">Wen Panel</p>
                     <p>Cal was first. <br></br>The first public university in the great state of California. <br></br> They are the pioneers. They are the trailblazers who started it all.</p>
-                    <br></br><br></br><a className="view_more" href=""><i class="fas fa-chevron-circle-right"></i>   View More</a>
+                    <a className="view_more" href=""><i class="fas fa-chevron-circle-right"></i>   View More</a>
                 </div>
-                <br></br>
-                <br></br>
-                <br></br>
                 <div className="about_us container">
                     <Row>
                         <Col className="about_us_description" span={12}>
